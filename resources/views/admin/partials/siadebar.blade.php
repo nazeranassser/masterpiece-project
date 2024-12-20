@@ -89,7 +89,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <a class="dash__custom-link btn--e-brand-b-2" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="background-color: #7737de; color: white; border: 2px solid #7737de; font-size: 15px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" >Logout</a>
+                                    <a class="dash__custom-link btn--e-brand-b-2" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="background-color: #7737de; color: white; border: 2px solid #7737de; font-size: 15px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" >Logout</a>
                                     <form id="logout-form" action="" method="POST"  style="font-size: 15px;" ">
                                         @csrf
                                     </form>

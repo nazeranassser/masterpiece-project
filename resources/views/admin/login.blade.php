@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +8,7 @@
 </head>
 <body>
     <h1>Admin Login</h1>
-    <form action="{{ route('admin.login') }}" method="POST">
+    <form action="{{ route('admin.login.submit') }}" method="POST">
         @csrf
         <label for="email">Email:</label>
         <input type="email" name="email" required>
