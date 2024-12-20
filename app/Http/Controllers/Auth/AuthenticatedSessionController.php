@@ -15,7 +15,8 @@ class AuthenticatedSessionController extends Controller
     /**
      * Display the login view.
      */
-    public function create(): View
+    
+     public function create(): View
     {
         return view('auth.login');
     }
@@ -23,13 +24,27 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(Request $request)
     {
-        $request->authenticate();
+        $credentials = $request->validate([
+            'email' => ['required', 'email'],
+            'password' => ['required'],
+        ]);
 
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            // التوجيه بناءً على الدور
+            if (Auth::user()->role === 'admin') {
+                return redirect()->route('admin.dashboard'); // توجيه الإدمن إلى لوحة التحكم
+            }
+
+            return redirect()->route('theme.index'); // توجيه المستخدم العادي إلى المتجر
+        }
+
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->onlyInput('email');
     }
 
     /**
