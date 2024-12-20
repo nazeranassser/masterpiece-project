@@ -70,7 +70,7 @@
                                     </div>
 
                                     <!-- Submit Button -->
-                                    <button class="btn btn--e-brand-b-2" style="background-color: #7737de; color: white; border: 2px solid #7737de;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" type="submit">SAVE</button>
+                                    <button class="btn btn--e-brand-b-2"  type="submit">SAVE</button>
                                 </form>
                             </div>
                         </div>

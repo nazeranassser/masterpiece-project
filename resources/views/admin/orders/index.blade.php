@@ -18,7 +18,7 @@
                                             <thead>
                                                 <tr>
                                                     <th>Order Id</th>
-                                                    
+                                                    <th>Customer Name</th>
                                                     <th>Customer Phone</th>
                                                     <th>Shipping Address</th>
                                                     <th>Order Status</th>
@@ -29,6 +29,7 @@
                                                 @foreach ($orders as $order)
                                                     <tr>
                                                         <td>{{ $order->id }}</td>
+                                                        <td>{{  $order->user->name }}</td>
                                                       
                                                         <td>{{ $order->customer_phone }}</td> <!-- عرض رقم الهاتف -->
                                                         <td>{{ $order->shipping_address }}</td> <!-- عرض عنوان الشحن -->

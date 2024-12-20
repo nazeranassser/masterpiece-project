@@ -42,14 +42,14 @@
                                                     @if($category->image)
                                                         <img id="preview-image" src="{{ asset('storage/' . $category->image) }}" alt="Category Image" class="u-img-fluid">
                                                         <div>
-                                                            <button type="button" class="btn-cancel btn btn--e-brand-b-2" style="background-color: #7737de; color: white; border: 2px solid #7737de;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" id="cancel-btn">Delete Image</button>
+                                                            <button type="button" class="btn-cancel btn btn--e-brand-b-2"    id="cancel-btn">Delete Image</button>
                                                         </div>
                                                     @endif
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <button type="submit" class="btn btn--e-brand-b-2" style="background-color: #7737de; color: white; border: 2px solid #7737de;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';">SAVE</button>
+                                        <button type="submit" class="btn btn--e-brand-b-2" >SAVE</button>
                                     </form>
                                 </div>
                             </div>

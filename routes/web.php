@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManageAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ThemeController;
 use App\Http\Controllers\AdminController;
@@ -8,6 +9,10 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CouponController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -77,8 +82,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
             'show' => 'messages.show',
             'destroy' => 'messages.destroy',
         ]);
-        Route::get('/orders', [AdminController::class, 'viewOrders'])->name('orders');
-        Route::get('/users', [AdminController::class, 'manageUsers'])->name('users');
+        Route::get('admin-show', [ManageAdminController::class,'index'])->name('admin.index');
+        Route::get('admin-create1', [ManageAdminController::class, 'create'])->name('admin.create');
+        Route::post('admin-create', [ManageAdminController::class, 'store'])->name('admin.store');
+        Route::patch('admins/{id}/toggle-status', [ManageAdminController::class, 'toggleStatus'])->name('admin.toggleStatus');
+        Route::get('order-show', [OrderController::class,'index'])->name('order.index');
+        Route::get('User', [UserController::class,'index'])->name('user.index');
+        Route::delete('User-del/{id}', [UserController::class, 'distroy'])->name('user.delete');
+        Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');
+        Route::get('coupons/create', [CouponController::class, 'create'])->name('coupons.create');
+        Route::post('coupons', [CouponController::class, 'store'])->name('coupons.store');
+        Route::patch('coupons/{id}/toggle-status', [CouponController::class, 'toggleStatus'])->name('coupons.toggleStatus');
+     
+
+        
+        
     });
 });
 

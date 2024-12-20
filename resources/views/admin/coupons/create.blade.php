@@ -23,32 +23,37 @@
                         <div class="col-lg-9 col-md-12">
                             <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
                                 <div class="dash__pad-2">
-                                    <h1 class="dash__h1 u-s-m-b-14" style="padding-bottom: 10px;">Add New Admin</h1>
+                                    <h1 class="dash__h1 u-s-m-b-14" style="padding-bottom: 10px;">Add New Coupon</h1>
 
-                                    <form class="dash-address-manipulation" method="POST" action="{{ route('admin.admin.store') }}">
+                                    <form class="dash-address-manipulation" method="POST" action="{{ route('admin.coupons.store') }}">
                                         @csrf
-                                        <input type="hidden" name="is_active" value="1">
-                                        <input type="hidden" name="is_super" value="0">
 
                                         <div class="gl-inline">
                                             <div class="u-s-m-b-30">
-                                                <label class="gl-label" for="admin-name">Name *</label>
-                                                <input class="input-text input-text--primary-style" name="name" type="text" id="admin-name" placeholder="Enter name" required>
+                                                <label class="gl-label" for="coupon-code">Code *</label>
+                                                <input class="input-text input-text--primary-style" name="code" type="text" id="coupon-code" placeholder="Enter code" required>
                                             </div>
                                             <div class="u-s-m-b-30">
-                                                <label class="gl-label" for="admin-email">Email *</label>
-                                                <input class="input-text input-text--primary-style" name="email" type="email" id="admin-email" placeholder="Enter email" required>
+                                                <label class="gl-label" for="coupon-discount">Discount *</label>
+                                                <input class="input-text input-text--primary-style" name="discount" type="number" id="coupon-discount" placeholder="Enter discount" required>
                                             </div>
                                         </div>
 
                                         <div class="gl-inline">
                                             <div class="u-s-m-b-30">
-                                                <label class="gl-label" for="admin-password">Password *</label>
-                                                <input class="input-text input-text--primary-style" name="password" type="password" id="admin-password" placeholder="Enter password" required>
+                                                <label class="gl-label" for="coupon-expiry">Expiry Date *</label>
+                                                <input class="input-text input-text--primary-style" name="expiry_date" type="date" id="coupon-expiry" required>
+                                            </div>
+                                            <div class="u-s-m-b-30">
+                                                <label class="gl-label" for="coupon-active">Active *</label>
+                                                <select class="input-text input-text--primary-style" name="is_active" id="coupon-active" required>
+                                                    <option value="1">Yes</option>
+                                                    <option value="0">No</option>
+                                                </select>
                                             </div>
                                         </div>
 
-                                        <button class="btn btn--e-brand-b-2" ;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this." type="submit">Add</button>
+                                        <button class="btn btn--e-brand-b-2" >Add</button>
                                     </form>
                                 </div>
                             </div>

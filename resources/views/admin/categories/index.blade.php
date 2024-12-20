@@ -25,7 +25,7 @@
                                     <div class="dash__address-header">
                                         <h1 class="dash__h1">Categories</h1>
                                     </div>
-                                     <a class="dash__custom-link btn--e-brand-b-2" style="background-color: #7737de; color: white; border: 2px solid #7737de;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" href="{{ route('admin.categories.create') }}">
+                                     <a class="dash__custom-link btn--e-brand-b-2"  href="{{ route('admin.categories.create') }}">
                                      <i class="fas fa-plus u-s-m-r-8"></i>
                                      <span>Add New Category</span>
                                      </a>
