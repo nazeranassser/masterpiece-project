@@ -40,7 +40,7 @@
                                                 
                                             
                                                         <li>
-                                                        <a href="{{ route('admin.admin.index') }}">
+                                                        <a href="">
                                                             <div class="admin_list">
                                                                 <div class="admin_list_div" >
                                                                       <img class="dash_img"  src="{{ asset('assets') }}/images/administrator.png" alt="">
@@ -53,7 +53,7 @@
                                                 
                                                 
                                                 <li>
-                                                <a href={{ route('admin.order.index') }}>
+                                                <a href=>
                                                     <div class="admin_list">
                                                         <div class="admin_list_div" >
                                                               <img class="dash_img"  src="{{ asset('assets') }}/images/box_2.png" alt="">
@@ -64,7 +64,7 @@
                                                 </a>
                                                 </li>
                                                 <li>
-                                                <a href="{{route('admin.user.index')}}">
+                                                <a href="">
                                                     <div class="admin_list">
                                                         <div class="admin_list_div" >
                                                               <img class="dash_img"  src="{{ asset('assets') }}/images/products/671fb3380fb81_user.png" alt="">
@@ -75,7 +75,7 @@
                                                 </a>
                                                 </li>
                                                 <li>
-                                                <a href="{{route('admin.message.index')}}">
+                                                <a href="{{route('admin.messages.index')}}">
                                                     <div class="admin_list">
                                                         <div class="admin_list_div" >
                                                               <img class="dash_img"  src="{{ asset('assets') }}/images/email.png" alt="">
@@ -89,8 +89,8 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <a class="dash__custom-link btn--e-brand-b-2" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="background-color: #7737de; color: white; border: 2px solid #7737de; font-size: 15px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" >Logout</a>
-                                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST"  style="font-size: 15px;" ">
+                                    <a class="dash__custom-link btn--e-brand-b-2" href="" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" style="background-color: #7737de; color: white; border: 2px solid #7737de; font-size: 15px; transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this.style.backgroundColor='#7737de'; this.style.borderColor='#7737de';" >Logout</a>
+                                    <form id="logout-form" action="" method="POST"  style="font-size: 15px;" ">
                                         @csrf
                                     </form>
                                    

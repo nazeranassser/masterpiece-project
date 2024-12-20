@@ -12,29 +12,25 @@
                         <div class="col-lg-9 col-md-12">
                             <div class="dash__box dash__box--shadow dash__box--radius dash__box--bg-white">
                                 <div class="dash__pad-2">
-                                    <h1 class="dash__h1 u-s-m-b-14">messages</h1>
-
-
+                                    <h1 class="dash__h1 u-s-m-b-14">Messages</h1>
 
                                     <div class="dash__table">
                                         <table class="dash__table">
                                             <thead>
                                                 <tr>
-                                                    <th>email</th> <!-- عمود جديد للصورة -->
-                                                    <th>message subject</th>
-                                                    <th>messege text</th>
-
+                                                    <th>Name</th> <!-- عرض عمود الاسم -->
+                                                    <th>Email</th>
+                                                    <th>Subject</th>
+                                                    <th>Message</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($messages as $message)
                                                     <tr>
-                                                        <!-- عرض الصورة -->
-                                                        <td>{{ $message->email}}</td>
-                                                        <td>{{ $message->message_subject }}</td>
-                                                        <td>{{ $message->message_text}}</td>
-
-
+                                                        <td>{{ $message->name }}</td> <!-- عرض الاسم -->
+                                                        <td>{{ $message->email }}</td>
+                                                        <td>{{ $message->subject }}</td>
+                                                        <td>{{ $message->message }}</td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
