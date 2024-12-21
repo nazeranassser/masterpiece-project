@@ -12,6 +12,9 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CouponController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\HomeController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -28,16 +31,25 @@ use Illuminate\Support\Facades\Route;
 
 // Theme Routes
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::get('/about', 'about')->name('about');
-    Route::get('/contact', 'contact')->name('contact');
-    Route::get('/cart', 'cart')->name('cart');
-    Route::get('/checkout', 'checkout')->middleware('auth')->name('checkout');
-    Route::get('/wishlist', 'wishlist')->name('wishlist');
+    Route::get('/', 'index')->name('index'); // الصفحة الرئيسية
+    Route::get('/new-arrivals', 'newArrivals')->name('newArrivals');
+    Route::get('/our-products', [ThemeController::class, 'ourProducts'])->name('our.products');
+    Route::get('/about', 'about')->name('about'); // صفحة من نحن
+    Route::get('/contact', 'contact')->name('contact'); // صفحة تواصل معنا
+    
+    Route::get('/wishlist', 'wishlist')->name('wishlist'); // صفحة الأمنيات
 });
-
 // Contact Us
 Route::post('/contact-us', [MessageController::class, 'store'])->name('contact.store');
+Route::get('add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('cart', [CartController::class, 'viewCart'])->name('cart.index');
+Route::get('remove-from-cart/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+Route::get('/cart/remove/{productId}', [CartController::class, 'removeItemFromCart'])->name('cart.remove');
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
+Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+
+
 
 // User Authentication Routes
 Route::prefix('user')->name('user.')->group(function () {
@@ -49,6 +61,7 @@ Route::prefix('user')->name('user.')->group(function () {
         Route::get('dashboard', function () {
             return view('dashboard'); // تأكد من إنشاء هذا الملف
         })->name('dashboard');
+      
     });
 });
 

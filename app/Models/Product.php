@@ -9,7 +9,7 @@ class Product extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name', 'description', 'price', 'quantity', 'category_id', 'image'
+        'name', 'description', 'price', 'quantity', 'category_id', 'image', 'coupon_id'
     ];
 
     // تعريف العلاقة مع Category
@@ -17,4 +17,9 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function coupon()
+{
+    return $this->belongsTo(Coupon::class, 'coupon_id');
+}
 }
