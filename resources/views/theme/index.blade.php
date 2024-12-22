@@ -120,7 +120,12 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('cart.add', $product->id) }}" title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
+    @csrf
+    <button type="submit" title="Add to Cart">
+        <i class="fas fa-plus-circle"></i> Add to Cart
+    </button>
+</form>
                                     </li>
                                     <li>
                                         <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">

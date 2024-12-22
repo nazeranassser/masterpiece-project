@@ -11,6 +11,9 @@
 
     <!--====== Google Font ======-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" rel="stylesheet">
+    <!-- إضافة مكتبة SweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 
     <!--====== Vendor Css ======-->
     <link rel="stylesheet" href="{{asset('assets')}}/css/vendor.css">
@@ -73,7 +76,7 @@
                                        
                                     <li class="has-dropdown">
 
-                                        <a>BLOG<i class="fas fa-angle-down u-s-m-l-6"></i></a>
+                                        <a>CATEGORIES<i class="fas fa-angle-down u-s-m-l-6"></i></a>
 
                                         <!--====== Dropdown ======-->
 
@@ -81,28 +84,36 @@
                                         <ul style="width:200px">
                                             <li>
 
-                                                <a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
+                                                <a href="{{ url('/ourproducts/sugar free') }}">sugar free</a></li>
+                                                <li>
+
+                                                <a href="{{ url('/ourproducts/gluten free') }}">gluten free</a></li>
+                                            <li>
+                                    
+
+                                                <a href="{{ url('/ourproducts/Dairy Free') }}">Dairy Free</a></li>
                                             <li>
 
-                                                <a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
+                                                <a href="{{ url('/ourproducts/keto') }}">keto</a></li>
                                             <li>
 
-                                                <a href="blog-sidebar-none.html">Blog Sidebar None</a></li>
+                                                <a href="{{ url('/ourproducts/Vegan') }}">Vegan</a></li>
                                             <li>
 
-                                                <a href="blog-masonry.html">Blog Masonry</a></li>
-                                            <li>
+                                                <a href="{{ url('/ourproducts/High Protein') }}">High Protein</a></li>
+                                                <li>
 
-                                                <a href="blog-detail.html">Blog Details</a></li>
+                                                <a href="{{ url('/ourproducts/special occasions') }}">special occasions</a></li>
+                                            
                                         </ul>
                                         <!--====== End - Dropdown ======-->
                                     </li>
                                     <li>
 
-                                        <a href="{{route('theme.about')}}">ABOUT US</a></li>
+                                        <a href="{{ url('/about') }}">ABOUT US</a></li>
                                     <li>
 
-                                        <a href="{{route('theme.contact')}}">CONTACT US</a></li>
+                                        <a href="{{ url('/contact') }}">CONTACT US</a></li>
                                 </ul>
                                 <!--====== End - List ======-->
                             </div>
@@ -170,7 +181,7 @@
                                        
                                     <li>
 
-                                        <a href="{{route('theme.wishlist')}}"><i class="far fa-heart"></i></a></li>
+                                        <a href=""><i class="far fa-heart"></i></a></li>
                                     <li class="has-dropdown">
 
                                         <a href="" class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
@@ -184,3 +195,4 @@
             <!--====== End - Nav 2 ======-->
         </header>
         <!--====== End - Main Header ======-->
+        

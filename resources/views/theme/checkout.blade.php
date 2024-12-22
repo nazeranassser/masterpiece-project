@@ -4,7 +4,20 @@
 
 
         <!--====== App Content ======-->
+
         <div class="app-content">
+         <!--====== Section 1 ======-->
+            <div class="u-s-p-y-60">
+
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="breadcrumb">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--====== End - Section 1 ======-->
 
 
             
@@ -21,75 +34,61 @@
     <div class="container">
         <div class="checkout-f">
             <div class="row">
-                <div class="col-lg-6">
-                    <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
-                    <form class="checkout-f__delivery" method="POST" action="{{ route('checkout.placeOrder') }}">
-                        <div class="u-s-m-b-30">
-                            <!-- First Name, Last Name -->
-                            <div class="gl-inline">
-                                <div class="u-s-m-b-15">
-                                    <label class="gl-label" for="billing-fname">FIRST NAME *</label>
-                                    <input class="input-text input-text--primary-style" type="text" name="billing-fname" id="billing-fname" required>
-                                </div>
-                                <div class="u-s-m-b-15">
-                                    <label class="gl-label" for="billing-lname">LAST NAME *</label>
-                                    <input class="input-text input-text--primary-style" type="text" name="billing-lname" id="billing-lname" required>
-                                </div>
-                            </div>
+            <div class="col-lg-6">
+    <h1 class="checkout-f__h1">DELIVERY INFORMATION</h1>
+    <form class="checkout-f__delivery" method="POST" action="{{ route('cart.cart.placeorder') }}">
+    @csrf
+    <div class="u-s-m-b-30">
+        <div class="gl-inline">
+            <div class="u-s-m-b-15">
+                <label class="gl-label" for="billing-fname">FIRST NAME *</label>
+                <input class="input-text input-text--primary-style" type="text" name="billing_fname" id="billing_fname" value="{{ old('billing_fname') }}" required>
+            </div>
+            <div class="u-s-m-b-15">
+                <label class="gl-label" for="billing-lname">LAST NAME *</label>
+                <input class="input-text input-text--primary-style" type="text" name="billing_lname" id="billing_lname" value="{{ old('billing_lname') }}" required>
+            </div>
+        </div>
+        <div class="u-s-m-b-15">
+            <label class="gl-label" for="billing-email">E-MAIL *</label>
+            <input class="input-text input-text--primary-style" type="email" name="billing_email" id="billing_email" value="{{ old('billing_email') }}" required>
+        </div>
+        <div class="u-s-m-b-15">
+            <label class="gl-label" for="billing-phone">PHONE *</label>
+            <input class="input-text input-text--primary-style" type="text" name="billing_phone" id="billing_phone" value="{{ old('billing_phone') }}" required>
+        </div>
+        <div class="u-s-m-b-15">
+            <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
+            <input class="input-text input-text--primary-style" type="text" name="billing_street" id="billing_street" value="{{ old('billing_street') }}" required>
+        </div>
+        <div class="u-s-m-b-10">
+            <label class="gl-label" for="order-note">ORDER NOTE</label>
+            <textarea class="text-area text-area--primary-style" id="order-note" name="order_note"></textarea>
+        </div>
+        <div class="u-s-m-b-15">
+        <select name="payment_method" required>
+              <option value="cash-on-delivery">Cash on Delivery</option>
+    
+    <!-- إضافة خيارات أخرى حسب الحاجة -->
+                   </select>
+        </div>
 
-                            <!-- E-MAIL -->
-                            <div class="u-s-m-b-15">
-                                <label class="gl-label" for="billing-email">E-MAIL *</label>
-                                <input class="input-text input-text--primary-style" type="email" name="billing-email" id="billing-email" required>
-                            </div>
 
-                            <!-- PHONE -->
-                            <div class="u-s-m-b-15">
-                                <label class="gl-label" for="billing-phone">PHONE *</label>
-                                <input class="input-text input-text--primary-style" type="text" name="billing-phone" id="billing-phone" required>
-                            </div>
+        
 
-                            <!-- STREET ADDRESS -->
-                            <div class="u-s-m-b-15">
-                                <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
-                                <input class="input-text input-text--primary-style" type="text" name="billing-street" id="billing-street" placeholder="House name and street name" required>
-                            </div>
-                            <div class="u-s-m-b-15">
-                                <label for="billing-street-optional"></label>
-                                <input class="input-text input-text--primary-style" type="text" name="billing-street-optional" id="billing-street-optional" placeholder="Apartment, suite unit etc. (optional)">
-                            </div>
+    </div>
+    <button type="submit">Place Order</button>
+</form>
+</div>
 
-                            <!-- ORDER NOTE -->
-                            <div class="u-s-m-b-10">
-                                <label class="gl-label" for="order-note">ORDER NOTE</label>
-                                <textarea class="text-area text-area--primary-style" id="order-note" name="order-note"></textarea>
-                            </div>
 
-                            <!-- Create Account Option (optional) -->
-                            <div class="collapse u-s-m-b-15" id="create-account">
-                                <span class="gl-text u-s-m-b-15">Create an account by entering the information below. If you are a returning customer please login at the top of the page.</span>
-                                <div>
-                                    <label class="gl-label" for="reg-password">Account Password *</label>
-                                    <input class="input-text input-text--primary-style" type="password" name="reg-password" id="reg-password">
-                                </div>
-                            </div>
-
-                            <button class="btn btn--e-transparent-brand-b-2" type="submit">SAVE</button>
-                        </div>
-                    </form>
-                </div>
+                
                 <div class="col-lg-6">
     <h1 class="checkout-f__h1">ORDER SUMMARY</h1>
 
-    <?php
-    // جلب السلة من الكوكيز
-    $cart = json_decode($_COOKIE['cart'] ?? '[]', true);
-
-    // التحقق مما إذا كانت السلة مصفوفة وليست null
-    if (!is_array($cart)) {
-        $cart = [];
-    }
-    ?>
+    
+    
+   
 
     <!-- Order Summary -->
     <div class="o-summary">
@@ -104,13 +103,13 @@
                         </div>
                         <div class="o-card__info-wrap">
                             <span class="o-card__name">
-                                <a href="{{ url('product-detail/' . $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                                <a href="{{ url('product-detail/' . $item['product_id']) }}">{{ $item['name'] }}</a>
                             </span>
                             <span class="o-card__quantity">Quantity x {{ $item['quantity'] }}</span>
                             <span class="o-card__price">${{ number_format($item['price'], 2) }}</span>
                         </div>
                     </div>
-                    <a href="{{ url('cart/remove/' . $item['product_id']) }}" class="o-card__del far fa-trash-alt"></a>
+                  
                 </div>
                 @empty
                 <p class="u-s-m-b-30">Your cart is empty.</p>
@@ -152,7 +151,7 @@
                         <div class="o-summary__section u-s-m-b-30">
                             <div class="o-summary__box">
                                 <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
-                                <form class="checkout-f__payment" method="POST" action="{{ route('checkout.placeOrder') }}">
+                                <form class="checkout-f__payment" method="POST" action="{{ route('cart.cart.placeorder') }}">
                                     @csrf
                                     <!-- Payment Method Selection -->
                                     <div class="u-s-m-b-10">

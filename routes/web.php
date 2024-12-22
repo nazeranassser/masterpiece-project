@@ -15,6 +15,8 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OurProductController;
+
 
 use Illuminate\Support\Facades\Route;
 
@@ -39,16 +41,32 @@ Route::controller(ThemeController::class)->name('theme.')->group(function () {
     
     Route::get('/wishlist', 'wishlist')->name('wishlist'); // صفحة الأمنيات
 });
-// Contact Us
+
 Route::post('/contact-us', [MessageController::class, 'store'])->name('contact.store');
-Route::get('add-to-cart/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
-Route::get('cart', [CartController::class, 'viewCart'])->name('cart.index');
-Route::get('remove-from-cart/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
-Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
-Route::get('/cart/remove/{productId}', [CartController::class, 'removeItemFromCart'])->name('cart.remove');
-Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
-Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
-Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
+Route::get('/ourproducts/{category}', [OurProductController::class, 'showProducts'])->name('theme.ourproducts');
+
+
+
+Route::prefix('cart')->name('cart.')->group(function () {
+    // عرض سلة التسوق
+    Route::get('/', [CartController::class, 'viewCart'])->name('index');
+    
+    // إضافة منتج إلى السلة
+    Route::post('add/{productId}', [CartController::class, 'addToCart'])->name('add');
+    
+    // حذف منتج من السلة
+    Route::delete('remove/{id}', [CartController::class, 'removeItemFromCart'])->name('remove');
+    
+    // تحديث الكمية في السلة
+    Route::post('update', [CartController::class, 'updateCart'])->name('update');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+    Route::post('/cart/checkout/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeorder');
+});
+
+Route::get('order/success', [CartController::class, 'orderSuccess'])->name('order.success');
+
+
+
 
 
 

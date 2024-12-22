@@ -11,11 +11,14 @@ class Order extends Model
 
     protected $fillable = [
         'user_id',
-        'shipping_address',
+        'customer_first_name',
+        'customer_last_name',
+        'customer_email',
         'customer_phone',
-        'placed_on',
-        'order_status',
-        'total',
+        'total_amount',
+        'payment_method',
+        'status',
+        'shipping_address',
     ];
 
     // علاقة مع نموذج المستخدم
@@ -24,8 +27,8 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function orderItems()
-{
-    return $this->hasMany(OrderItem::class);
-}
+    public function orderProducts()
+    {
+        return $this->hasMany(OrderProduct::class);
+    }
 }
