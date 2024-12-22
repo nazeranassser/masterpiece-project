@@ -1,79 +1,65 @@
 <?php
 
-namespace App\Controllers;
+namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
-class CheckoutController
+class CheckoutController extends Controller
 {
-    public function showCheckoutForm()
+    public function index()
     {
-        // جلب المنتجات من السلة المخزنة في الكوكيز
-        $cart = $_COOKIE['cart'] ?? [];
-        
-        // استعراض السلة في الواجهة
-        return view('theme.checkout', [
-            'cart' => $cart
+        // هنا يمكنك معالجة السلة، عرض تفاصيل المنتجات، عنوان الشحن، إلخ
+        return view('theme.checkout');
+    }
+    public function showCheckout()
+{
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+    $total_amount = array_reduce($cart, function ($carry, $item) {
+        return $carry + $item['quantity'] * $item['price'];
+    }, 0);
+
+    return view('theme.checkout', compact('cart', 'total_amount'));
+}
+
+
+public function placeOrder(Request $request)
+{
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+
+    if (empty($cart)) {
+        return redirect()->route('cart.index');
+    }
+
+    $order = new Order();
+    $order->fill($request->only(['first_name', 'last_name', 'email', 'phone', 'street', 'note']));
+    $order->payment_method = $request->input('payment');
+    $order->total_amount = $this->calculateTotal($cart);
+    $order->order_status = 'pending';
+    $order->save();
+
+    foreach ($cart as $item) {
+        $orderItem = new OrderItem([
+            'product_id' => $item['id'],
+            'quantity' => $item['quantity'],
+            'price' => $item['price'],
         ]);
+        $order->orderItems()->save($orderItem);
     }
 
-    public function placeOrder()
-    {
-        // جلب بيانات الطلب من النموذج
-        $first_name = $_POST['billing-fname'];
-        $last_name = $_POST['billing-lname'];
-        $email = $_POST['billing-email'];
-        $phone = $_POST['billing-phone'];
-        $street = $_POST['billing-street'];
-        $note = $_POST['order-note'];
-        $payment_method = $_POST['payment']; // طريقة الدفع
+    Cookie::queue('cart', '', -1); // حذف الكوكيز
 
-        // التحقق من وجود السلة
-        if (empty($_COOKIE['cart'])) {
-            return redirect()->route('cart'); // العودة للسلة إذا كانت فارغة
-        }
+    return redirect()->route('theme.index');
+}
 
-        $cart = json_decode($_COOKIE['cart'], true);
+private function calculateTotal($cart)
+{
+    return array_reduce($cart, function ($total, $item) {
+        return $total + $item['price'] * $item['quantity'];
+    }, 0);
+}
 
-        // إنشاء الطلب في جدول `orders`
-        $order = new Order();
-        $order->first_name = $first_name;
-        $order->last_name = $last_name;
-        $order->email = $email;
-        $order->phone = $phone;
-        $order->street = $street;
-        $order->note = $note;
-        $order->payment_method = $payment_method;
-        $order->total_amount = $this->calculateTotal($cart); // حساب المبلغ الإجمالي
-        $order->status = 'pending'; // الحالة الأولية
-        $order->save();
-
-        // إضافة العناصر إلى جدول `order_items`
-        foreach ($cart as $item) {
-            $product = Product::find($item['product_id']);
-            $orderItem = new OrderItem();
-            $orderItem->order_id = $order->id;
-            $orderItem->product_id = $product->id;
-            $orderItem->quantity = $item['quantity'];
-            $orderItem->price = $product->price;
-            $orderItem->save();
-        }
-
-        // حذف السلة من الكوكيز بعد إتمام الطلب
-        setcookie('cart', '', time() - 3600, '/'); 
-
-        return redirect()->route('order.success'); // توجيه إلى صفحة النجاح
-    }
-
-    private function calculateTotal($cart)
-    {
-        $total = 0;
-        foreach ($cart as $item) {
-            $product = Product::find($item['product_id']);
-            $total += $product->price * $item['quantity'];
-        }
-        return $total;
-    }
 }

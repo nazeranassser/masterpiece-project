@@ -34,11 +34,11 @@ class CartController extends Controller
             'name' => $product->name,
             'price' => $product->price,
             'quantity' => 1, // الكمية الافتراضية
-            'available_quantity' => $product->available_quantity ,// الكمية المتوفرة
+            'available_quantity' => $product->available_quantity, // الكمية المتوفرة
             'image' => $product->image
         ];
 
-        // حفظ السلة الجديدة في الكوكيز
+        // تخزين السلة الجديدة في الكوكيز
         Cookie::queue('cart', json_encode($cart), 60); // الكوكيز صالح لمدة 60 دقيقة
 
         return back()->with('success', 'Product added to cart');
@@ -46,23 +46,26 @@ class CartController extends Controller
 
     // عرض سلة التسوق
     public function viewCart()
-    {
-        // استرجاع السلة من الكوكيز
-        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
-
-        return view('theme.cart', compact('cart'));
+{
+    // استرجاع السلة من الكوكيز
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+    
+    // حساب المجموع الكلي للمنتجات في السلة
+    $total_amount = 0;
+    foreach ($cart as $item) {
+        $total_amount += $item['price'] * $item['quantity'];
     }
+
+    return view('theme.cart', compact('cart', 'total_amount'));
+}
 
     // حذف منتج من السلة
     public function removeItemFromCart($id)
     {
         // استرجاع السلة من الكوكيز
-        $cart = Cookie::get('cart');
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
 
         if ($cart) {
-            // تحويل السلة إلى مصفوفة
-            $cart = json_decode($cart, true);
-
             // البحث عن العنصر وحذفه من السلة
             foreach ($cart as $key => $item) {
                 if ($item['id'] == $id) {

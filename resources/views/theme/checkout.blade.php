@@ -6,29 +6,6 @@
         <!--====== App Content ======-->
         <div class="app-content">
 
-            <!--====== Section 1 ======-->
-            <div class="u-s-p-y-60">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="breadcrumb">
-                            <div class="breadcrumb__wrap">
-                                <ul class="breadcrumb__list">
-                                    <li class="has-separator">
-
-                                        <a href="index.html">Home</a></li>
-                                    <li class="is-marked">
-
-                                        <a href="checkout.html">Checkout</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--====== End - Section 1 ======-->
-
 
             
 
@@ -102,65 +79,81 @@
                     </form>
                 </div>
                 <div class="col-lg-6">
-                    <h1 class="checkout-f__h1">ORDER SUMMARY</h1>
+    <h1 class="checkout-f__h1">ORDER SUMMARY</h1>
 
-                    <!-- Order Summary -->
-                    <div class="o-summary">
-                        <div class="o-summary__section u-s-m-b-30">
-                            <div class="o-summary__item-wrap gl-scroll">
-                                <!-- Loop Through Cart Items -->
-                                <?php $cart = json_decode($_COOKIE['cart'] ?? '[]', true); ?>
-                                @foreach($cart as $item)
-                                <div class="o-card">
-                                    <div class="o-card__flex">
-                                        <div class="o-card__img-wrap">
-                                            <img class="u-img-fluid" src="{{ asset('assets/images/product/' . $item['product_id'] . '.jpg') }}" alt="">
-                                        </div>
-                                        <div class="o-card__info-wrap">
-                                            <span class="o-card__name">
-                                                <a href="product-detail.html">{{ $item['product_name'] }}</a>
-                                            </span>
-                                            <span class="o-card__quantity">Quantity x {{ $item['quantity'] }}</span>
-                                            <span class="o-card__price">${{ $item['price'] }}</span>
-                                        </div>
-                                    </div>
-                                    <a class="o-card__del far fa-trash-alt"></a>
-                                </div>
-                                @endforeach
-                            </div>
-                        </div>
+    <?php
+    // جلب السلة من الكوكيز
+    $cart = json_decode($_COOKIE['cart'] ?? '[]', true);
 
-                        <!-- Order Total -->
-                        <div class="o-summary__section u-s-m-b-30">
-                            <div class="o-summary__box">
-                                <table class="o-summary__table">
-                                    <tbody>
-                                        <tr>
-                                            <td>SHIPPING</td>
-                                            <td>$4.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>TAX</td>
-                                            <td>$0.00</td>
-                                        </tr>
-                                        <tr>
-                                            <td>SUBTOTAL</td>
-                                            <td>${{ $total_amount }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>GRAND TOTAL</td>
-                                            <td>${{ $total_amount + 4 }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+    // التحقق مما إذا كانت السلة مصفوفة وليست null
+    if (!is_array($cart)) {
+        $cart = [];
+    }
+    ?>
+
+    <!-- Order Summary -->
+    <div class="o-summary">
+        <div class="o-summary__section u-s-m-b-30">
+            <div class="o-summary__item-wrap gl-scroll">
+                <!-- Loop Through Cart Items -->
+                @forelse($cart as $item)
+                <div class="o-card">
+                    <div class="o-card__flex">
+                        <div class="o-card__img-wrap">
+                            <img class="u-img-fluid" src="{{ asset('assets/images/product/' . $item['product_id'] . '.jpg') }}" alt="Product Image">
                         </div>
+                        <div class="o-card__info-wrap">
+                            <span class="o-card__name">
+                                <a href="{{ url('product-detail/' . $item['product_id']) }}">{{ $item['product_name'] }}</a>
+                            </span>
+                            <span class="o-card__quantity">Quantity x {{ $item['quantity'] }}</span>
+                            <span class="o-card__price">${{ number_format($item['price'], 2) }}</span>
+                        </div>
+                    </div>
+                    <a href="{{ url('cart/remove/' . $item['product_id']) }}" class="o-card__del far fa-trash-alt"></a>
+                </div>
+                @empty
+                <p class="u-s-m-b-30">Your cart is empty.</p>
+                @endforelse
+            </div>
+        </div>
+
+        <!-- Order Total -->
+        <div class="o-summary__section u-s-m-b-30">
+            <div class="o-summary__box">
+                <table class="o-summary__table">
+                    <tbody>
+                        <tr>
+                            <td>SHIPPING</td>
+                            <td>$4.00</td>
+                        </tr>
+                        <tr>
+                            <td>TAX</td>
+                            <td>$0.00</td>
+                        </tr>
+                        <tr>
+                            <td>SUBTOTAL</td>
+                            <td>${{ number_format($total_amount, 2) }}</td>
+                        </tr>
+                        <tr>
+                            <td>GRAND TOTAL</td>
+                            <td>${{ number_format($total_amount + 4, 2) }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
                         <!-- Payment Information -->
                         <div class="o-summary__section u-s-m-b-30">
                             <div class="o-summary__box">
                                 <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
                                 <form class="checkout-f__payment" method="POST" action="{{ route('checkout.placeOrder') }}">
+                                    @csrf
                                     <!-- Payment Method Selection -->
                                     <div class="u-s-m-b-10">
                                         <div class="radio-box">

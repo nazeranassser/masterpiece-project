@@ -124,28 +124,36 @@
 
 
     <!--====== Section 3 ======-->
-    <div class="u-s-p-b-60">
+<div class="u-s-p-b-60">
+    <!--====== Section Content ======-->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                <!-- تحقق إذا كانت السلة تحتوي على منتجات قبل السماح بالانتقال إلى الـ checkout -->
+                @php
+                    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+                @endphp
 
-        <!--====== Section Content ======-->
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                    <form class="f-cart" action="{{ route('cart.update') }}" method="POST">
-                        @csrf
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div>
-                                    <button class="btn btn--e-brand-b-2" type="submit">PROCEED TO CHECKOUT</button>
-                                </div>
-                            </div>
+                <form class="f-cart" action="{{ route('cart.update') }}" method="POST">
+                    @csrf
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                            <!-- إذا كانت السلة فارغة عرض رسالة بدلاً من الزر -->
+                            @if(count($cart) > 0)
+    <a href="{{ route('checkout.show') }}" class="btn btn--e-brand-b-2">PROCEED TO CHECKOUT</a>
+@else
+    <button class="btn btn--e-brand-b-2" type="button" disabled>Your cart is empty</button>
+@endif
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
         </div>
-        <!--====== End - Section Content ======-->
     </div>
-    <!--====== End - Section 3 ======-->
+    <!--====== End - Section Content ======-->
+</div>
+<!--====== End - Section 3 ======-->
+
 </div>
 <!--====== End - App Content ======-->
 

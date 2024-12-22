@@ -46,7 +46,8 @@ Route::get('cart', [CartController::class, 'viewCart'])->name('cart.index');
 Route::get('remove-from-cart/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::post('update-cart', [CartController::class, 'updateCart'])->name('cart.update');
 Route::get('/cart/remove/{productId}', [CartController::class, 'removeItemFromCart'])->name('cart.remove');
-Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.show');
+Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::get('/checkout', [CheckoutController::class, 'showCheckout'])->name('checkout.show');
 Route::post('/checkout', [CheckoutController::class, 'placeOrder'])->name('checkout.placeOrder');
 
 
