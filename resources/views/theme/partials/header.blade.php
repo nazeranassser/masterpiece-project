@@ -148,45 +148,21 @@
                                 <ul class="ah-list ah-list--design1 ah-list--link-color-secondary">
                                     <li class="has-dropdown" data-tooltip="tooltip" data-placement="left" title="Account">
 
-                                        <a><i class="far fa-user-circle"></i></a>
+                                        <a href="{{ route('profile.edit') }}"><i class="far fa-user-circle"></i></a>
 
-                                        <!--====== Dropdown ======-->
-
-                                        <span class="js-menu-toggle"></span>
-                                        <ul style="width:120px">
-                                            <li>
-
-                                                <a href="dashboard.html"><i class="fas fa-user-circle u-s-m-r-6"></i>
-
-                                                    <span>Account</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-user-plus u-s-m-r-6"></i>
-
-                                                    <span>Signup</span></a></li>
-                                            <li>
-
-                                                <a href="signin.html"><i class="fas fa-lock u-s-m-r-6"></i>
-
-                                                    <span>Signin</span></a></li>
-                                            <li>
-
-                                                <a href="signup.html"><i class="fas fa-lock-open u-s-m-r-6"></i>
-
-                                                    <span>Signout</span></a></li>
-                                        </ul>
-                                        <!--====== End - Dropdown ======-->
-                                    <li>
+                                        
+                                    
 
                                        
                                     <li>
 
-                                        <a href=""><i class="far fa-heart"></i></a></li>
+                                        <a href="{{ route('wishlist') }}"><i class="far fa-heart"></i></a></li>
                                     <li class="has-dropdown">
 
-                                        <a href="" class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
+                                        <a href="{{ route('cart.index') }}" class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
                                             <span class="total-item-round">2</span></a>
+                                            
 
                                         
                     <!--====== End - Secondary Nav ======-->

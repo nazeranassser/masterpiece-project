@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Message;
+
 
 use Illuminate\Http\Request;
 
@@ -35,15 +37,7 @@ class ThemeController extends Controller
         return view('theme.contact');
     }
 
-    public function cart()
-    {
-        return view('theme.cart');
-    }
-
-    public function checkout()
-    {
-        return view('theme.checkout');
-    }
+   
 
     public function wishlist()
     {
@@ -61,21 +55,31 @@ class ThemeController extends Controller
     }
     public function ourProducts(Request $request)
 {
-    // جلب جميع المنتجات مع تصنيفها حسب النوع
-    $products = Product::all(); // جلب كل المنتجات من قاعدة البيانات
-
-    // جلب جميع الأنواع (الفئات) المرتبطة بالمنتجات
-    $categories = Category::all(); // تأكد من أن لديك موديل Category مرتبط بالمنتجات
-
-    // إذا تم اختيار نوع (فئة) من قبل المستخدم، فلترة المنتجات بناءً على الفئة
+    // جلب جميع الفئات
+    $categories = Category::all();
+    
+    // تصفية المنتجات حسب الفئة إن وجدت
     if ($request->has('category')) {
-        $categorySlug = $request->input('category');
-        $products = Product::whereHas('category', function($query) use ($categorySlug) {
-            $query->where('slug', $categorySlug); // تأكد من أن الفئة يتم تحديدها باستخدام "slug"
+        $categoryName = $request->input('category');
+        $products = Product::whereHas('category', function ($query) use ($categoryName) {
+            $query->where('name', $categoryName); // استخدم 'name' بدلاً من 'slug'
         })->get();
+    } else {
+        $products = Product::all(); // جلب كل المنتجات في حالة عدم اختيار فئة
     }
 
     return view('theme.index', compact('products', 'categories'));
 }
+
+public function feedback()
+{
+    // استرجاع آخر 4 رسائل من جدول messages
+    $themeMessages = Message::latest()->take(4)->get();
+    dd($themeMessages);
+    
+
+    // تمرير الرسائل إلى العرض
+    return view('theme.index', compact('$themeMessages'));
+} 
 
 }

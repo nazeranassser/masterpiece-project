@@ -45,6 +45,12 @@
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a>
                                                 </div>
                                                 <div class="product-m__add-cart">
+                                                <form action="{{ route('cart.add', $product->id) }}" method="POST">
+    @csrf
+    <button type="submit" title="Add to Cart">
+        <i class="fas fa-plus-circle"></i> Add to Cart
+    </button>
+</form>
                                                     <a class="btn--e-brand" href="#" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a>
                                                 </div>
                                             </div>

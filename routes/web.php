@@ -16,6 +16,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\OurProductController;
+use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\ProductDetailsController;
+
+
 
 
 use Illuminate\Support\Facades\Route;
@@ -35,15 +40,29 @@ use Illuminate\Support\Facades\Route;
 Route::controller(ThemeController::class)->name('theme.')->group(function () {
     Route::get('/', 'index')->name('index'); // الصفحة الرئيسية
     Route::get('/new-arrivals', 'newArrivals')->name('newArrivals');
-    Route::get('/our-products', [ThemeController::class, 'ourProducts'])->name('our.products');
+    Route::get('/products', [ProductController::class, 'ourProducts'])->name('our.products');
+    Route::get('/feedback', 'feedback')->name('feedback');
+
     Route::get('/about', 'about')->name('about'); // صفحة من نحن
     Route::get('/contact', 'contact')->name('contact'); // صفحة تواصل معنا
     
-    Route::get('/wishlist', 'wishlist')->name('wishlist'); // صفحة الأمنيات
 });
 
 Route::post('/contact-us', [MessageController::class, 'store'])->name('contact.store');
 Route::get('/ourproducts/{category}', [OurProductController::class, 'showProducts'])->name('theme.ourproducts');
+// عرض الصفحة الرئيسية مع قسم الفيدباك
+
+
+
+
+Route::get('/product/{id}', [ProductDetailsController::class, 'show'])->name('product.details');
+
+
+Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist');
+Route::get('/wishlist/add/{id}', [WishlistController::class, 'add'])->name('wishlist.add');
+Route::get('/wishlist/remove/{id}', [WishlistController::class, 'remove'])->name('wishlist.remove');
+Route::get('/wishlist/clear', [WishlistController::class, 'clear'])->name('wishlist.clear');
+
 
 
 

@@ -110,33 +110,23 @@
                     <div class="product-o product-o--hover-on">
                         <div class="product-o__wrap">
                             <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->name }}">
+                                <img class="aspect__img" src="{{ asset('storage/images/products/' . $product->image)}}" alt="{{ $product->name }}">
                             </a>
                             <div class="product-o__action-wrap">
                                 <ul class="product-o__action-list">
                                     <li>
-                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View">
+                                        <a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="product details">
                                             <i class="fas fa-search-plus"></i>
                                         </a>
                                     </li>
+                                    
                                     <li>
-                                        <form action="{{ route('cart.add', $product->id) }}" method="POST">
-    @csrf
-    <button type="submit" title="Add to Cart">
-        <i class="fas fa-plus-circle"></i> Add to Cart
-    </button>
-</form>
-                                    </li>
-                                    <li>
-                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
+                                        <a href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
                                             <i class="fas fa-heart"></i>
                                         </a>
                                     </li>
-                                    <li>
-                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops">
-                                            <i class="fas fa-envelope"></i>
-                                        </a>
-                                    </li>
+                                    
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -155,7 +145,15 @@
                                     <span class="product-o__discount">${{ number_format($product->discount_price, 2) }}</span>
                                 @endif
                             </span>
-                        </div>
+                            </div>
+                            <form action="{{ route('cart.add', $product['id']) }}" method="POST">
+                    @csrf
+                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
+                        <i ></i> Add to Cart
+                    </button>
+                </form>
+                            
+                        
                     </div>
                 </div>
                 @endforeach
@@ -198,14 +196,20 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="filter-category-container">
-                        @foreach($productsByType as $product)
-                            <div class="filter__category-wrapper">
-                                <button class="btn filter__btn filter__btn--style-1" type="button" data-filter=".{{$product->category->slug}}">
-                                    {{ $product->category->name }}
-                                </button>
-                            </div>
-                        @endforeach
-                    </div>
+                    @isset($categories)
+    @foreach($categories as $category)
+        <div class="filter__category-wrapper">
+            <a href="{{ route('our.products', ['category' => $category->name]) }}" class="btn filter__btn filter__btn--style-1">
+                {{ $category->name }}
+            </a>
+        </div>
+    @endforeach
+@else
+    <p>No categories available.</p>
+@endisset
+                 </div>
+    
+
                 </div>
             </div>
         </div>
@@ -216,35 +220,45 @@
         <div class="container">
         <div class="row">
             @foreach($products as $product)
-                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-                    <div class="product-o product-o--hover-on product-o--radius">
-                        <div class="product-o__wrap">
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('assets/images/product/'.$product->image) }}" alt="{{ $product->name }}">
-                            </a>
-                            <div class="product-o__action-wrap">
-                                <ul class="product-o__action-list">
-                                    <li><a data-modal="modal" data-modal-id="#quick-look" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                    <li><a href="{{ route('cart.add', $product->id) }}" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                    <li><a href="signin.html" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                    <li><a href="signin.html" title="Notify Me When Price Drops"><i class="fas fa-envelope"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <span class="product-o__category">
-                            <a href="shop-side-version-2.html">{{ $product->category->name }}</a>
-                        </span>
-                        <span class="product-o__name">
-                            <a href="product-detail.html">{{ $product->name }}</a>
-                        </span>
-                        <div class="product-o__rating gl-rating-style">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                            <span class="product-o__review">(23)</span>
-                        </div>
-                        <span class="product-o__price">${{ $product->price }}</span>
-                    </div>
+    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
+        <div class="product-o product-o--hover-on product-o--radius">
+            <div class="product-o__wrap">
+                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                    <img class="aspect__img" src="{{ asset('assets/images/product/'.$product->image) }}" alt="{{ $product->name }}">
+                </a>
+                <div class="product-o__action-wrap">
+                    <ul class="product-o__action-list">
+                        <li><a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="product details">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a></li>
+                        
+                        <li><a href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
+                                            <i class="fas fa-heart"></i>
+                                        </a></li>
+                        
+                    </ul>
                 </div>
-            @endforeach
+            </div>
+            <span class="product-o__category">
+                <a href="shop-side-version-2.html">{{ $product->category->name }}</a>
+            </span>
+            <span class="product-o__name">
+                <a href="product-detail.html">{{ $product->name }}</a>
+            </span>
+            <div class="product-o__rating gl-rating-style">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                <span class="product-o__review">(23)</span>
+            </div>
+            <span class="product-o__price">${{ $product->price }}</span>
+            <form action="{{ route('cart.add', $product['id']) }}" method="POST">
+                    @csrf
+                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
+                        <i ></i> Add to Cart
+                    </button>
+                </form>
+        </div>
+    </div>
+@endforeach
         </div>
     </div>
 
@@ -490,74 +504,38 @@
 
 
                 <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
+<div class="section__content">
+    <div class="container">
 
-                        <!--====== Testimonial Slider ======-->
-                        <div class="slider-fouc">
-                            <div class="owl-carousel" id="testimonial-slider">
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{asset('assets')}}/images/about/test-1.jpg" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{asset('assets')}}/images/about/test-2.jpg" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{asset('assets')}}/images/about/test-3.jpg" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                                <div class="testimonial">
-                                    <div class="testimonial__img-wrap">
-
-                                        <img class="testimonial__img" src="{{asset('assets')}}/images/about/test-4.jpg" alt=""></div>
-                                    <div class="testimonial__content-wrap">
-
-                                        <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
-                                        <blockquote class="testimonial__block-quote">
-                                            <p>"Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean."</p>
-                                        </blockquote>
-
-                                        <span class="testimonial__author">John D. / DVNTR Inc.</span>
-                                    </div>
-                                </div>
-                            </div>
+        <!--====== Testimonial Slider ======-->
+        <div class="slider-fouc">
+            <div class="owl-carousel" id="testimonial-slider">
+            @if (isset($themeMessages) && count($themeMessages))
+                @foreach($themeMessages as $message)
+                    <div class="testimonial">
+                        <div class="testimonial__img-wrap">
+                        
+                           
                         </div>
-                        <!--====== End - Testimonial Slider ======-->
+                        <div class="testimonial__content-wrap">
+                            <span class="testimonial__double-quote"><i class="fas fa-quote-right"></i></span>
+                            <blockquote class="testimonial__block-quote">
+                                <p>"{{ $message->message }}"</p>
+                            </blockquote>
+                            <span class="testimonial__author">{{ $message->name }}</span>
+                        </div>
                     </div>
-                </div>
-                <!--====== End - Section Content ======-->
+                @endforeach
+                @else
+    <p>No messages available.</p>
+@endif
+            </div>
+        </div>
+        <!--====== End - Testimonial Slider ======-->
+    </div>
+</div>
+<!--====== End - Section Content ======-->
+
             </div>
             <!--====== End - Section 11 ======-->
 
