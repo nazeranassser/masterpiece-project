@@ -13,15 +13,15 @@
                                 <div class="col-12">
                                     <div class="slider-content slider-content--animation">
 
-                                        <span class="content-span-1 u-c-secondary">Latest Update Stock</span>
+                                        
 
-                                        <span class="content-span-2 u-c-secondary">30% Off On Electronics</span>
+                                        <span class="content-span-2 u-c-secondary">Unforgettable flavors for every moment</span>
 
-                                        <span class="content-span-3 u-c-secondary">Find electronics on best prices, Also Discover most selling products of electronics</span>
+                                        <span class="content-span-3 u-c-secondary">Indulge in the finest cakes made with love, crafted to suit every taste</span>
 
-                                        <span class="content-span-4 u-c-secondary">Starting At
+                                        <span class="content-span-4 u-c-secondary">
 
-                                            <span class="u-c-brand">$1050.00</span></span>
+                                            </span>
 
                                         <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
                                 </div>
@@ -110,7 +110,7 @@
                     <div class="product-o product-o--hover-on">
                         <div class="product-o__wrap">
                             <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('storage/images/products/' . $product->image)}}" alt="{{ $product->name }}">
+                                <img class="aspect__img" src="{{ asset('storage/images/products/' . $product->image) }}" alt="{{ $product->name }}">
                             </a>
                             <div class="product-o__action-wrap">
                                 <ul class="product-o__action-list">
