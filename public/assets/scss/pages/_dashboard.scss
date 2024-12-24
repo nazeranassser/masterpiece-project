@@ -106,9 +106,9 @@
     margin-bottom: 8px;
   }
   &__w-icon-style-1 {
-    background-color: rgba(#F4BBC9,.14);
+    background-color: rgba(#ff4500,.14);
     > i {
-      color: #F4BBC9;
+      color: #ff4500;
     }
   }
 
@@ -638,7 +638,7 @@
 
   &--delivered {
     background-color: rgba(255, 69, 0, 0.14);
-    color: #F4BBC9;
+    color: #ff4500;
   }
 }
 

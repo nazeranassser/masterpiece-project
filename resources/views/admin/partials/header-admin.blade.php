@@ -86,7 +86,7 @@
 :root {
     --color-1: #F191AC;  /* Primary color */
     --color-2: #F6A6BB;  /* Secondary color */
-    --color-3: #F4BBC9;  /* Tertiary color */
+    --color-3: #ff4500;  /* Tertiary color */
     --color-4: #FAE6E7;  /* Light color */
     /* --color-5: #F7EEED;  Background color */
     --color-5: #FFF8DC;  /* Background color */
