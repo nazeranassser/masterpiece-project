@@ -16,6 +16,19 @@ class ThemeController extends Controller
 {
     // جلب آخر 4 منتجات مضافة إلى قاعدة البيانات
     $newArrivals = Product::orderBy('created_at', 'desc')->limit(4)->get();
+    $themeMessages = Message::latest()->take(4)->get();
+
+    $categories = Category::all();
+    
+    // تصفية المنتجات حسب الفئة إن وجدت
+    if ($request->has('category')) {
+        $categoryName = $request->input('category');
+        $products = Product::whereHas('category', function ($query) use ($categoryName) {
+            $query->where('name', $categoryName); // استخدم 'name' بدلاً من 'slug'
+        })->get();
+    } else {
+        $products = Product::all(); // جلب كل المنتجات في حالة عدم اختيار فئة
+    }
     
     // جلب جميع المنتجات
     $products = Product::all();
@@ -24,7 +37,7 @@ class ThemeController extends Controller
     $productsByType = Product::with('category')->get();  // assuming 'type' is the relationship name
 
     // عرض الصفحة الرئيسية مع تمرير البيانات
-    return view('theme.index', compact('newArrivals', 'products', 'productsByType'));
+    return view('theme.index', compact('newArrivals', 'products', 'productsByType','themeMessages','categories'));
 }
 
     public function about()
@@ -75,11 +88,11 @@ public function feedback()
 {
     // استرجاع آخر 4 رسائل من جدول messages
     $themeMessages = Message::latest()->take(4)->get();
-    dd($themeMessages);
+    
     
 
     // تمرير الرسائل إلى العرض
-    return view('theme.index', compact('$themeMessages'));
+    return view('theme.index', compact('themeMessages'));
 } 
 
 }

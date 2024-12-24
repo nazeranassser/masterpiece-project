@@ -28,48 +28,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="hero-slide hero-slide--2">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-content slider-content--animation">
-
-                                        <span class="content-span-1 u-c-white">Find Top Brands</span>
-
-                                        <span class="content-span-2 u-c-white">10% Off On Electronics</span>
-
-                                        <span class="content-span-3 u-c-white">Find electronics on best prices, Also Discover most selling products of electronics</span>
-
-                                        <span class="content-span-4 u-c-white">Starting At
-
-                                            <span class="u-c-brand">$380.00</span></span>
-
-                                        <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="hero-slide hero-slide--3">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="slider-content slider-content--animation">
-
-                                        <span class="content-span-1 u-c-secondary">Find Top Brands</span>
-
-                                        <span class="content-span-2 u-c-secondary">10% Off On Electronics</span>
-
-                                        <span class="content-span-3 u-c-secondary">Find electronics on best prices, Also Discover most selling products of electronics</span>
-
-                                        <span class="content-span-4 u-c-secondary">Starting At
-
-                                            <span class="u-c-brand">$550.00</span></span>
-
-                                        <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    
                 </div>
             </div>
             <!--====== End - Primary Slider ======-->
@@ -199,7 +159,7 @@
                     @isset($categories)
     @foreach($categories as $category)
         <div class="filter__category-wrapper">
-            <a href="{{ route('our.products', ['category' => $category->name]) }}" class="btn filter__btn filter__btn--style-1">
+            <a href="{{ route('theme.index', ['category' => $category->name]) }}" class="btn filter__btn filter__btn--style-1">
                 {{ $category->name }}
             </a>
         </div>
@@ -265,165 +225,11 @@
 
 
 
-            <!--====== Section 3 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Intro ======-->
-                <div class="section__intro u-s-m-b-46">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary u-s-m-b-12">DEAL OF THE DAY</h1>
-
-                                    <span class="section__span u-c-silver">BUY DEAL OF THE DAY, HURRY UP! THESE NEW PRODUCTS WILL EXPIRE SOON.</span>
-
-                                    <span class="section__span u-c-silver">ADD THESE ON YOUR CART.</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Intro ======-->
-
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 u-s-m-b-30">
-                                <div class="product-o product-o--radius product-o--hover-off u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-
-                                            <img class="aspect__img" src="{{asset('assets')}}/images/product/electronic/product11.jpg" alt=""></a>
-                                        <div class="product-o__special-count-wrap">
-                                            <div class="countdown countdown--style-special" data-countdown="2020/05/01"></div>
-                                        </div>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="product-detail.html">DJI Phantom Drone 4k</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-
-                                        <span class="product-o__review">(2)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 u-s-m-b-30">
-                                <div class="product-o product-o--radius product-o--hover-off u-h-100">
-                                    <div class="product-o__wrap">
-
-                                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-
-                                            <img class="aspect__img" src="{{asset('assets')}}/images/product/electronic/product12.jpg" alt=""></a>
-                                        <div class="product-o__special-count-wrap">
-                                            <div class="countdown countdown--style-special" data-countdown="2020/05/01"></div>
-                                        </div>
-                                        <div class="product-o__action-wrap">
-                                            <ul class="product-o__action-list">
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a></li>
-                                                <li>
-
-                                                    <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a></li>
-                                                <li>
-
-                                                    <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a></li>
-                                                <li>
-
-                                                    <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <span class="product-o__category">
-
-                                        <a href="shop-side-version-2.html">Electronics</a></span>
-
-                                    <span class="product-o__name">
-
-                                        <a href="product-detail.html">DJI Phantom Drone 2k</a></span>
-                                    <div class="product-o__rating gl-rating-style"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-
-                                        <span class="product-o__review">(2)</span></div>
-
-                                    <span class="product-o__price">$125.00
-
-                                        <span class="product-o__discount">$160.00</span></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 3 ======-->
-
+            
 
             
 
-            <!--====== Section 5 ======-->
-            <div class="banner-bg">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="banner-bg__countdown">
-                                    <div class="countdown countdown--style-banner" data-countdown="2020/05/01"></div>
-                                </div>
-                                <div class="banner-bg__wrap">
-                                    <div class="banner-bg__text-1">
-
-                                        <span class="u-c-white">Global</span>
-
-                                        <span class="u-c-secondary">Offers</span></div>
-                                    <div class="banner-bg__text-2">
-
-                                        <span class="u-c-secondary">Official Launch</span>
-
-                                        <span class="u-c-white">Don't Miss!</span></div>
-
-                                    <span class="banner-bg__text-block banner-bg__text-3 u-c-secondary">Enjoy Free Shipping when you buy 2 items and above!</span>
-
-                                    <a class="banner-bg__shop-now btn--e-secondary" href="shop-side-version-2.html">Shop Now</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 5 ======-->
-
+            
 
             <!--====== Section 6 ======-->
             <div class="u-s-p-y-60">
