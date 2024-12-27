@@ -70,7 +70,7 @@ class CartController extends Controller
         if ($cart) {
             // البحث عن العنصر وحذفه من السلة
             foreach ($cart as $key => $item) {
-                if ($item['id'] == $id) {
+                if ($item['product_id'] == $id) {
                     unset($cart[$key]);
                     break;
                 }
@@ -90,10 +90,10 @@ class CartController extends Controller
         $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
 
         foreach ($cart as $key => $item) {
-            if ($item['id'] == $request->product_id) {
+            if ($item['product_id'] == $request->product_id) {
                 // التحقق من أن الكمية المطلوبة لا تتجاوز الكمية المتوفرة
                 $newQuantity = $request->quantity;
-                if ($newQuantity > $item['available_quantity']) {
+                if ($newQuantity > $item['quantity']) {
                     return redirect()->back()->with('error', 'Quantity exceeds available stock');
                 }
 
@@ -189,7 +189,7 @@ public function placeOrder(Request $request)
     // تفريغ السلة بعد الإتمام
     Cookie::queue(Cookie::forget('cart'));
 
-    return redirect()->route('order.success')->with('success', 'Order placed successfully');
+    return redirect()->route('theme.index')->with('success', 'Order placed successfully');
 }
 
 

@@ -127,7 +127,7 @@
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
                                     <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ route('product.details', $similar->id) }}">
-                                        <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="">
+                                        <img class="aspect__img" src="{{ asset('storage/' . $similar->image) }}" alt="">
                                     </a>
                                     <div class="product-o__action-wrap">
                                         <ul class="product-o__action-list">

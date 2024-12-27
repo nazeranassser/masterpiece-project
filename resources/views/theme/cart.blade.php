@@ -48,7 +48,7 @@
                                             <div class="table-p__box">
                                                 <div class="table-p__img-wrap">
                                                    @if(isset($item['image']))
-                        <img class="u-img-fluid" src="{{ asset('assets/images/product/' . $item['image']) }}" alt="Product Image">
+                        <img class="u-img-fluid" src="{{ asset('storage/' . $item['image'])}} " alt="Product Image">
                     @else
                         <img class="u-img-fluid" src="{{ asset('assets/images/default.png') }}" alt="Default Image">
                     @endif

@@ -58,7 +58,7 @@
             <input class="input-text input-text--primary-style" type="text" name="billing_phone" id="billing_phone" value="{{ old('billing_phone') }}" required>
         </div>
         <div class="u-s-m-b-15">
-            <label class="gl-label" for="billing-street">STREET ADDRESS *</label>
+            <label class="gl-label" for="billing-street">ADDRESS *</label>
             <input class="input-text input-text--primary-style" type="text" name="billing_street" id="billing_street" value="{{ old('billing_street') }}" required>
         </div>
         <div class="u-s-m-b-10">
@@ -99,7 +99,7 @@
                 <div class="o-card">
                     <div class="o-card__flex">
                         <div class="o-card__img-wrap">
-                            <img class="u-img-fluid" src="{{ asset('assets/images/product/' . $item['product_id'] . '.jpg') }}" alt="Product Image">
+                            <img class="u-img-fluid" src="{{ asset('storage/' . $item['image']) }}" alt="Product Image">
                         </div>
                         <div class="o-card__info-wrap">
                             <span class="o-card__name">

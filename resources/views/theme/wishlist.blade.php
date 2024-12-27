@@ -59,7 +59,7 @@
                                 <div class="w-r__container">
                                     <div class="w-r__wrap-1">
                                         <div class="w-r__img-wrap">
-                                            <img class="u-img-fluid" src="{{ asset('assets/images/product/'.$product['image']) }}" alt="">
+                                            <img class="u-img-fluid" src="{{ asset('storage/' . $product['image']) }}" alt="">
                                         </div>
                                         <div class="w-r__info">
                                             <span class="w-r__name">

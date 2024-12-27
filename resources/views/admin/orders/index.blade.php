@@ -29,7 +29,7 @@
                                                 @foreach ($orders as $order)
                                                     <tr>
                                                         <td>{{ $order->id }}</td>
-                                                        <td>{{  $order->user->name }}</td>
+                                                        <td>{{  $order->customer_first_name }}</td>
                                                       
                                                         <td>{{ $order->customer_phone }}</td> <!-- عرض رقم الهاتف -->
                                                         <td>{{ $order->shipping_address }}</td> <!-- عرض عنوان الشحن -->
