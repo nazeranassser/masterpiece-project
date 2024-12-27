@@ -39,7 +39,7 @@
                                         <div class="product-m">
                                             <div class="product-m__thumb">
                                                 <a class="aspect aspect--bg-grey aspect--square u-d-block" href="">
-                                                    <img class="aspect__img" src="{{ $product->image_url }}" alt="{{ $product->name }}">
+                                                    <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                                 </a>
                                                 <div class="product-m__quick-look">
                                                     <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a>

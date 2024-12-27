@@ -14,7 +14,7 @@
                     <!-- يمكنك إضافة Breadcrumb هنا حسب الحاجة -->
                     <!--====== End - Product Breadcrumb ======-->
                      <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('uploads/products/' . $product->image) }}" alt="{{ $product->name }}">
+                                <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                             </a>
 
                     <!--====== Product Detail Zoom ======-->
@@ -22,10 +22,10 @@
     <div class="slider-fouc pd-wrap">
         <div id="pd-o-initiate">
             <!-- عرض صورة واحدة فقط -->
-            <div class="pd-o-img-wrap" data-src="{{ asset('storage/images/products/' . $product->image) }}">
+            <div class="pd-o-img-wrap" data-src="{{ asset('storage/' . $product->image) }}">
                 <img class="u-img-fluid" 
-                     src="{{ asset('storage/images/products/' . $product->image) }}" 
-                     data-zoom-image="{{ asset('storage/images/products/' . $product->image) }}" 
+                     src="{{ asset('storage/' . $product->image) }}" 
+                     data-zoom-image="{{ asset('storage/' . $product->image) }}" 
                      alt="{{ $product->name }}">
             </div>
         </div>
@@ -127,7 +127,7 @@
                             <div class="product-o product-o--hover-on">
                                 <div class="product-o__wrap">
                                     <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ route('product.details', $similar->id) }}">
-                                        <img class="aspect__img" src="{{ asset('images/products/' . $similar->image) }}" alt="">
+                                        <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="">
                                     </a>
                                     <div class="product-o__action-wrap">
                                         <ul class="product-o__action-list">

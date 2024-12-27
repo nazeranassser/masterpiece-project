@@ -70,7 +70,7 @@
                     <div class="product-o product-o--hover-on">
                         <div class="product-o__wrap">
                             <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('storage/images/products/' . $product->image) }}" alt="{{ $product->name }}">
+                                <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                             </a>
                             <div class="product-o__action-wrap">
                                 <ul class="product-o__action-list">
@@ -184,7 +184,7 @@
         <div class="product-o product-o--hover-on product-o--radius">
             <div class="product-o__wrap">
                 <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                    <img class="aspect__img" src="{{ asset('assets/images/product/'.$product->image) }}" alt="{{ $product->name }}">
+                    <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                 </a>
                 <div class="product-o__action-wrap">
                     <ul class="product-o__action-list">
