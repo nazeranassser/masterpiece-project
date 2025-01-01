@@ -35,7 +35,20 @@
 
                                         <span class="contact-o__info-text-2">(+0) 900 901 904</span>
 
-                                        <span class="contact-o__info-text-2">(+0) 900 901 902</span>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
+                                <div class="contact-o u-h-100">
+                                    <div class="contact-o__wrap">
+                                        <div class="contact-o__icon"><i class="far fa-envelope"></i></div>
+
+                                        <span class="contact-o__info-text-1">EMAIL</span>
+
+                                        <span class="contact-o__info-text-2">contact@domain.com</span>
+
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -46,25 +59,12 @@
 
                                         <span class="contact-o__info-text-1">OUR LOCATION</span>
 
-                                        <span class="contact-o__info-text-2">4247 Ashford Drive VA-20006</span>
+                                        <span class="contact-o__info-text-2">Amman - Jordan</span>
 
-                                        <span class="contact-o__info-text-2">Virginia US</span>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="contact-o u-h-100">
-                                    <div class="contact-o__wrap">
-                                        <div class="contact-o__icon"><i class="far fa-clock"></i></div>
-
-                                        <span class="contact-o__info-text-1">WORK TIME</span>
-
-                                        <span class="contact-o__info-text-2">5 Days a Week</span>
-
-                                        <span class="contact-o__info-text-2">From 9 AM to 7 PM</span>
-                                    </div>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
                             <div class="col-lg-12">
                                 <div class="contact-area u-h-100">
                                     <div class="contact-area__heading">
-                                        <h2>Get In Touch</h2>
+                                        <h2>Get In Touch And leave a Feedback</h2>
                                     </div>
                                     <form class="contact-f" method="POST" action="{{ route('contact.store') }}">
     @csrf <!-- حماية ضد الهجمات -->
