@@ -11,16 +11,7 @@
                 <div class="section__content">
                     <div class="container">
                         <div class="breadcrumb">
-                            <div class="breadcrumb__wrap">
-                                <ul class="breadcrumb__list">
-                                    <li class="has-separator">
-
-                                        <a href="index.html">Home</a></li>
-                                    <li class="is-marked">
-
-                                        <a href="wishlist.html">Wishlist</a></li>
-                                </ul>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>
@@ -69,17 +60,20 @@
                                                 <a href="">{{ $product['category_name'] }}</a>
                                             </span>
                                             <span class="w-r__price">
-                                                <span class="w-r__discount"></span>
+                                                <!--<span class="w-r__discount"></span>-->
+                                                <span class="w-r__price">{{ $product['price']}}</span>
                                             </span>
                                         </div>
                                     </div>
                                     <div class="w-r__wrap-2">
+                                    
                                    <form action="{{ route('cart.add', $product['id']) }}" method="POST">
                     @csrf
-                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
-                        <i ></i> Add to Cart
+                    <button class="w-r__link btn--e-transparent-platinum-b-2" type="submit" title="Add to Cart">
+                        <i ></i> ADD TO CART
                     </button>
                 </form>
+                
                                         
                                         <a class="w-r__link btn--e-transparent-platinum-b-2" href="">VIEW</a>
                                         <a class="w-r__link btn--e-transparent-platinum-b-2" href="{{ route('wishlist.remove', ['id' => $product['id']]) }}">REMOVE</a>
@@ -88,7 +82,7 @@
                             </div>
                         @endforeach
                     @else
-                        <p>No products in your wishlist.</p>
+                        <h4 class='u-s-m-b-15'  style='text-align: center;'>No products in your wishlist.</h4>
                     @endif
                     <!--====== End - Wishlist Products ======-->
 
