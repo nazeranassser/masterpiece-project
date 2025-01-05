@@ -65,19 +65,32 @@
                                             </span>
                                         </div>
                                     </div>
-                                    <div class="w-r__wrap-2">
+                                    <div class="w-r__wrap-2 " style='display :flex;'>
                                     
-                                   <form action="{{ route('cart.add', $product['id']) }}" method="POST">
+                                   <div><form action="{{ route('cart.add', $product['id']) }}" method="POST">
                     @csrf
                     <button class="w-r__link btn--e-transparent-platinum-b-2" type="submit" title="Add to Cart">
                         <i ></i> ADD TO CART
                     </button>
                 </form>
-                
+                </div>
                                         
-                                        <a class="w-r__link btn--e-transparent-platinum-b-2" href="">VIEW</a>
-                                        <a class="w-r__link btn--e-transparent-platinum-b-2" href="{{ route('wishlist.remove', ['id' => $product['id']]) }}">REMOVE</a>
-                                    </div>
+                                       <div>
+    <form action="{{ route('product.details', ['id' => $product['id']]) }}" method="GET" style="display: inline;">
+        <button class="w-r__link btn--e-transparent-platinum-b-2" type="submit" title="product details">
+            VIEW
+        </button>
+    </form>
+</div>
+<div>
+    <form action="{{ route('wishlist.remove', ['id' => $product['id']]) }}" method="GET" style="display: inline;">
+        <button class="w-r__link btn--e-transparent-platinum-b-2" type="submit" title="Remove from wishlist">
+            REMOVE
+        </button>
+    </form>
+</div>
+
+                                    
                                 </div>
                             </div>
                         @endforeach
@@ -94,7 +107,7 @@
                                 <span>CONTINUE SHOPPING</span></a>
                         </div>
                         <div class="route-box__g">
-                            <a class="route-box__link" href=""><i class="fas fa-trash"></i>
+                            <a class="route-box__link" href="{{ route('wishlist.clear') }}"><i class="fas fa-trash"></i>
                                 <span>CLEAR WISHLIST</span></a>
                         </div>
                     </div>

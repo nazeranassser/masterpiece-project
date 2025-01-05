@@ -7,30 +7,29 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shop-p">
-                        <div class="shop-p__toolbar u-s-m-b-30">
-                            <div class="shop-p__tool-style">
-                                <div class="tool-style__form-wrap">
-                                    <div class="u-s-m-b-8">
-                                        <select class="select-box select-box--transparent-b-2">
-                                            <option>Show: 8</option>
-                                            <option selected>Show: 12</option>
-                                            <option>Show: 16</option>
-                                            <option>Show: 28</option>
-                                        </select>
-                                    </div>
-                                    <div class="u-s-m-b-8">
-                                        <select class="select-box select-box--transparent-b-2">
-                                            <option selected>Sort By: Newest Items</option>
-                                            <option>Sort By: Latest Items</option>
-                                            <option>Sort By: Best Selling</option>
-                                            <option>Sort By: Best Rating</option>
-                                            <option>Sort By: Lowest Price</option>
-                                            <option>Sort By: Highest Price</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
+                       <div class="shop-p__toolbar u-s-m-b-30">
+    <div class="shop-p__tool-style">
+        <form method="GET" action="{{ route('theme.ourproducts', $category->name) }}" class="tool-style__form-wrap" id="filterForm">
+            <div class="u-s-m-b-8">
+                <select name="show" class="select-box select-box--transparent-b-2" onchange="document.getElementById('filterForm').submit();">
+                    <option value="8" {{ request('show') == '8' ? 'selected' : '' }}>Show: 8</option>
+                    <option value="12" {{ request('show') == '12' ? 'selected' : '' }}>Show: 12</option>
+                    <option value="16" {{ request('show') == '16' ? 'selected' : '' }}>Show: 16</option>
+                    <option value="28" {{ request('show') == '28' ? 'selected' : '' }}>Show: 28</option>
+                </select>
+            </div>
+            <div class="u-s-m-b-8">
+                <select name="sort" class="select-box select-box--transparent-b-2" onchange="document.getElementById('filterForm').submit();">
+                    <option value="newest" {{ request('sort') == 'newest' ? 'selected' : '' }}>Sort By: Newest Items</option>
+                    <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Sort By: Lowest Price</option>
+                    <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Sort By: Highest Price</option>
+                </select>
+            </div>
+        </form>
+    </div>
+</div>
+
 
                         <div class="shop-p__collection">
                             <div class="row is-grid-active">
@@ -38,45 +37,33 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                                 </a>
                                                 <div class="product-m__quick-look">
-                                                    <a class="fas fa-search" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick Look"></a>
+                                                    <a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="product details">
+                                            <i class="fas fa-search-plus"></i>
+                                        </a>
+                                                                                                        <a class="far fa-heart" href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a>
+                                                    
                                                 </div>
-                                                <div class="product-m__add-cart">
-                                                <form action="{{ route('cart.add', $product->id) }}" method="POST">
-    @csrf
-    <button type="submit" title="Add to Cart">
-        <i class="fas fa-plus-circle"></i> Add to Cart
-    </button>
-</form>
-                                                    <a class="btn--e-brand" href="#" data-modal="modal" data-modal-id="#add-to-cart">Add to Cart</a>
-                                                </div>
+                                                
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">{{ $category->name }}</a>
+                                                    <a href="#">{{ $category->name }}</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href=">{{ $product->name }}</a>
-                                                </div>
-                                                <div class="product-m__rating gl-rating-style">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star-half-alt"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <i class="far fa-star"></i>
-                                                    <span class="product-m__review">()</span>
+                                                    <a href="#">{{ $product->name }}</a>
                                                 </div>
                                                 <div class="product-m__price">${{ $product->price }}</div>
                                                 <div class="product-m__hover">
-                                                    <div class="product-m__preview-description">
-                                                        <span>{{ $product->description }}</span>
-                                                    </div>
-                                                    <div class="product-m__wishlist">
-                                                        <a class="far fa-heart" href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a>
-                                                    </div>
+                                                    <form action="{{ route('cart.add', $product->id) }}" method="POST">
+                                                        @csrf
+                                                        <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">Add to Cart</button>
+                                                    </form>
+                                                    
+                                                   
                                                 </div>
                                             </div>
                                         </div>
@@ -84,18 +71,13 @@
                                 @endforeach
                             </div>
                         </div>
-
-                        <div class="u-s-p-y-60">
-                            <!--====== Pagination ======-->
-                            <ul class="shop-p__pagination">
-                                <li class="is-active"><a href="shop-grid-full.html">1</a></li>
-                                <li><a href="shop-grid-full.html">2</a></li>
-                                <li><a href="shop-grid-full.html">3</a></li>
-                                <li><a href="shop-grid-full.html">4</a></li>
-                                <li><a class="fas fa-angle-right" href="shop-grid-full.html"></a></li>
-                            </ul>
-                            <!--====== End - Pagination ======-->
-                        </div>
+                        <div class="pagination-wrapper">
+    <nav aria-label="Page navigation">
+        <ul class="pagination">
+            {{ $products->appends(request()->query())->links() }}
+        </ul>
+    </nav>
+</div>
                     </div>
                 </div>
             </div>
@@ -105,6 +87,73 @@
 </div>
 <!--====== End - App Content ======-->
 @include('theme.partials.footer')
+<style>
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.pagination {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pagination li {
+    margin: 0 3px;
+}
+
+.pagination li a {
+    color: #555;
+    padding: 6px 10px;
+    font-size: 14px; /* حجم الخط العام */
+    border: 1px solid #ddd;
+    text-decoration: none;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination li a:hover {
+    background-color: #D2691E;
+    color: white;
+}
+
+.pagination li.active a {
+    background-color: #D2691E;
+    color: white;
+    pointer-events: none;
+}
+
+.pagination li.disabled a {
+    color: #ccc;
+    border: 1px solid #ccc;
+}
+
+/* تخصيص حجم الأسهم */
+.pagination li a::before {
+    content: '←'; /* سهم يسار */
+    font-size: 12px; /* تصغير حجم السهم */
+}
+
+.pagination li a::after {
+    content: '→'; /* سهم يمين */
+    font-size: 12px; /* تصغير حجم السهم */
+}
+
+/* تخصيص اتجاه السهم في رابط "Previous" */
+.pagination li:first-child a::before {
+    content: '«'; /* سهم السابق */
+}
+
+/* تخصيص اتجاه السهم في رابط "Next" */
+.pagination li:last-child a::after {
+    content: '»'; /* سهم التالي */
+}
+</style>
+
+
 <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
         window.ga = function() {
@@ -144,3 +193,4 @@
     </noscript>
 </body>
 </html>
+
