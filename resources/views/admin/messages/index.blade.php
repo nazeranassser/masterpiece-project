@@ -22,6 +22,7 @@
                                                     <th>Email</th>
                                                     <th>Subject</th>
                                                     <th>Message</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -31,6 +32,14 @@
                                                         <td>{{ $message->email }}</td>
                                                         <td>{{ $message->subject }}</td>
                                                         <td>{{ $message->message }}</td>
+                                                        <td>
+                                                    <form action="{{ route('admin.messages.destroy', $message->id) }}" method="POST" style="display:inline;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button class="address-book-edit btn--e-transparent-platinum-b-2" style="margin-right:4px;" type="submit">Delete</button>
+                                                    </form>
+                                                        
+                                                    </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>

@@ -48,7 +48,7 @@
                                             </div>
                                         </div>
 
-                                        <button class="btn btn--e-brand-b-2" ;  transition: all 0.3s ease;" onmouseover="this.style.backgroundColor='#6b2fcc'; this.style.borderColor='#6b2fcc';" onmouseout="this." type="submit">Add</button>
+                                        <button class="btn btn--e-brand-b-2" ;  transition: all 0.3s ease;" onmouseout="this." type="submit">Add</button>
                                     </form>
                                 </div>
                             </div>

@@ -39,14 +39,14 @@
                                             <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
                                                 <div class="dash__pad-3">
                                                     <h2 class="dash__h1 u-s-m-b-8"
-                                                        style="text-align:center;font-size:30px">Total Sales</h2>
+                                                        style="text-align:center;font-size:30px">Total Orders and sales</h2>
                                                     <div class="dash__link dash__link--secondary u-s-m-b-8">
 
                                                         <a href="dash-edit-profile.html"></a>
                                                     </div>
 
                                                     <h1 class="dash__h1 u-s-m-b-10"
-                                                        style='font-size:40px;padding-top:24px'>
+                                                        style='font-size:40px;padding-top:24px'>{{ $ordersCount }} </h1>
                                                     <br>
                                                     <span class="dash__text">From
                                                         <?php echo date('Y-m-d', strtotime('-30 days')); ?></span>
@@ -65,8 +65,7 @@
                                                     <div class="dash__link dash__link--secondary u-s-m-b-8">
                                                     </div>
                                                     <h1 class="dash__h1 u-s-m-b-10"
-                                                        style='font-size:40px;padding-top:24px'><?php
-                                                        ?> </h1>
+                                                        style='font-size:40px;padding-top:24px'>{{ $usersCount }} </h1>
                                                     <span class="dash__text"></span>
                                                 </div>
                                             </div>
@@ -75,12 +74,11 @@
                                             <div class="dash__box dash__box--bg-grey dash__box--shadow-2 u-h-100">
                                                 <div class="dash__pad-3">
                                                     <h2 class="dash__h1 u-s-m-b-8"
-                                                        style="text-align:center;font-size:28px">Messages</h2>
+                                                        style="text-align:center;font-size:28px">Total Messages</h2>
                                                     <div class="dash__link dash__link--secondary u-s-m-b-8">
                                                     </div>
                                                     <h1 class="dash__h1 u-s-m-b-10"
-                                                        style='font-size:40px;padding-top:24px'><?php
-                                                        ?> </h1>
+                                                        style='font-size:40px;padding-top:24px'>{{ $messagesCount }} </h1>
                                                     <span class="dash__text"></span>
                                                 </div>
                                             </div>
@@ -88,56 +86,40 @@
                                     </div>
                                 </div>
                             </div>
-                           
+                           <div class="dash__box dash__box--shadow dash__box--bg-white dash__box--radius">
+                                        <h2 class="dash__h2 u-s-p-xy-20">RECENT ORDERS</h2>
+                                        <div class="dash__table-wrap gl-scroll">
+                                            <table class="dash__table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Order #</th>
+                                                        <th>Customer Name</th>
+                                                        <th>shipping address</th>
+                                                        <th>Placed On</th>
+                                                        <th>Total</th>
+                                                        <th>Status</th>
+                                                    </tr>
+                                                </thead>
+                                                 <tbody>
+                                                @foreach ($orders as $order)
+                                                    <tr>
+                                                        <td>{{ $order->id }}</td>
+                                                        <td>{{  $order->customer_first_name }}</td>
+                                                        <td>{{ $order->shipping_address }}</td> <!-- عرض رقم الهاتف -->
+                                                        <td>{{ $order->created_at }}</td>
+                                                        <td>{{ $order->total_amount }}</td> <!-- عرض المبلغ الإجمالي -->
+                                                        <td>{{ $order->status }}</td> <!-- عرض حالة الطلب -->
+                                                        
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                
                                 
                                        
-                                            <?php
-
-                                            // include('./php/show_admin.php');
-                                            
-                                            // $order = new orders();
-                                            // $order_row = $order->showOrders();
-                                            // foreach ($orders as $order) {
-                                            //     $statusColor = '';
-                                            //     switch ($order['order_status']) {
-                                            //         case 'processing':
-                                            //             $statusColor = 'background-color: gray; color: white; padding: 3px 6px; border-radius: 4px;';
-                                            //             break;
-                                            //         case 'shipped':
-                                            //             $statusColor = 'background-color: yellow; color: black; padding: 3px 6px; border-radius: 4px;';
-                                            //             break;
-                                            //         case 'delivered':
-                                            //             $statusColor = 'background-color: green; color: white; padding: 3px 6px; border-radius: 4px;';
-                                            //             break;
-                                            //         case 'cancelled':
-                                            //             $statusColor = 'background-color: red; color: white; padding: 3px 6px; border-radius: 4px;';
-                                            //             break;
-                                            //         default:
-                                            //             $statusColor = 'background-color: black; color: white; padding: 3px 6px; border-radius: 4px;'; // Default color if none of the cases match
-                                            //             break;
-                                            //     }
-                                            //     if ($order['order_status'] == 'processing') {
-                                            //         echo "<tr>
-                                            //             <td>" . $order['order_id'] . "</td>
-                                            //             <td>" . $order['delivery_address'] . "</td>
-                                            //             <td>" . $order['customer_phone'] . "</td>
-                                            //             <td>" . $order['created_at'] . "</td>
-                                            //             <td><span style ='" . $statusColor . "'>" . $order['order_status'] . "</td>
-                                            //             <td><div class='dash__table-total'>
-                                            //                     <span>" . $order['order_total_amount_after'] . " JD</span>
-                                            //                     <div class='dash__link dash__link--brand'>
-                                            //                         <form method='GET' action='/orderDetails'>
-                                            //                             <input type='text' value='" . $order['order_id'] . "' name='id' style='visibility: hidden;display: none;'>
-                                            //                             <button type='submit' class='address-book-edit btn--e-transparent-platinum-b-2' style='border:0;color:#ff4500'><a>MANAGE</a></button>
-                                            //                         </form>
-                                            //                     </div>
-                                            //                 </div>
-                                            //             </td>
-                                            //         </tr>";
-                                            //     }
-                                            // }
-                                            // ?>
+                            
 
                                         </tbody>
                                     </table>

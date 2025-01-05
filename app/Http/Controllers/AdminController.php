@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Order;
+use App\Models\Message;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -32,6 +35,20 @@ class AdminController extends Controller
 
     public function dashboard()
     {
-        return view('admin.dashboard'); // صفحة لوحة التحكم
+        // استرجاع عدد الرسائل
+        $messagesCount = Message::count(); // افترض أن نموذج الرسائل اسمه Message
+        
+        // استرجاع عدد الطلبات
+        $ordersCount = Order::count();
+        
+        // استرجاع عدد المستخدمين
+        $usersCount = User::count();
+        
+        // استرجاع آخر 5 طلبات فقط مع ترتيبها حسب تاريخ الإنشاء
+        $orders = Order::with('user')->latest()->take(5)->get();
+        
+        // تمرير المتغيرات إلى واجهة لوحة التحكم
+        return view('admin.dashboard', compact('orders', 'messagesCount', 'ordersCount', 'usersCount'));
     }
+    
 }

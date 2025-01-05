@@ -58,6 +58,6 @@ class MessageController extends Controller
         $message->delete();
 
         // إعادة التوجيه مع رسالة تأكيد بعد الحذف
-        return redirect()->route('messages.index')->with('success', 'Message deleted successfully!');
+        return redirect()->route('admin.messages.index')->with('success', 'Message deleted successfully!');
     }
 }

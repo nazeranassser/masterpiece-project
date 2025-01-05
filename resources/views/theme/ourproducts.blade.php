@@ -37,14 +37,16 @@
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="{{ route('product.details', $product->id) }}">
                                                     <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
                                                 </a>
                                                 <div class="product-m__quick-look">
                                                     <a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="product details">
                                             <i class="fas fa-search-plus"></i>
                                         </a>
-                                                                                                        <a class="far fa-heart" href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"></a>
+                                                                                                        <a href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
+                                            <i class="fas fa-heart"></i>
+                                        </a>
                                                     
                                                 </div>
                                                 

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Message;
+use App\Models\OrderProduct;
 
 
 use Illuminate\Http\Request;
@@ -17,6 +18,7 @@ class ThemeController extends Controller
     // جلب آخر 4 منتجات مضافة إلى قاعدة البيانات
     $newArrivals = Product::orderBy('created_at', 'desc')->limit(4)->get();
     $themeMessages = Message::latest()->take(4)->get();
+    
 
     $categories = Category::all();
     
@@ -35,9 +37,10 @@ class ThemeController extends Controller
 
     // جلب المنتجات مع الأنواع المرتبطة بها
     $productsByType = Product::with('category')->get();  // assuming 'type' is the relationship name
+    $bestSellersThisWeek = OrderProduct::getBestSellersThisWeek(2);
 
     // عرض الصفحة الرئيسية مع تمرير البيانات
-    return view('theme.index', compact('newArrivals', 'products', 'productsByType','themeMessages','categories'));
+    return view('theme.index', compact('newArrivals', 'products', 'productsByType','themeMessages','categories','bestSellersThisWeek'));
 }
 
     public function about()
@@ -68,6 +71,7 @@ class ThemeController extends Controller
     }
     public function ourProducts(Request $request)
 {
+    
     // جلب جميع الفئات
     $categories = Category::all();
     
@@ -75,10 +79,11 @@ class ThemeController extends Controller
     if ($request->has('category')) {
         $categoryName = $request->input('category');
         $products = Product::whereHas('category', function ($query) use ($categoryName) {
-            $query->where('name', $categoryName); // استخدم 'name' بدلاً من 'slug'
+            $query->where('name', $categoryName); 
         })->get();
+
     } else {
-        $products = Product::all(); // جلب كل المنتجات في حالة عدم اختيار فئة
+        $products = Product::all(); 
     }
 
     return view('theme.index', compact('products', 'categories'));

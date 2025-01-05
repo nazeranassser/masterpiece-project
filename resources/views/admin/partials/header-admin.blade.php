@@ -92,7 +92,7 @@
     --color-5: #FFF8DC;  /* Background color */
 }
 body {
-    background-color: #FFFAF3;
+    background-color:rgb(255, 255, 255);
 }
 
 .container-xxl{

@@ -138,6 +138,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('admin-create', [ManageAdminController::class, 'store'])->name('admin.store');
         Route::patch('admins/{id}/toggle-status', [ManageAdminController::class, 'toggleStatus'])->name('admin.toggleStatus');
         Route::get('order-show', [OrderController::class,'index'])->name('order.index');
+        Route::patch('/admin/orders/{id}/status', [OrderController::class, 'updateStatus'])->name('admin.orders.updateStatus');
+        
+
+
         Route::get('User', [UserController::class,'index'])->name('user.index');
         Route::delete('User-del/{id}', [UserController::class, 'distroy'])->name('user.delete');
         Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');

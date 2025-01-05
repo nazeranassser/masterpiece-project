@@ -128,6 +128,87 @@
             </div>
             <!--====== End - NEW ARRIVALS ======-->
 
+<!--====== Section 3 ======-->
+<div class="u-s-p-b-60">
+
+    <!--====== Section Intro ======-->
+    <div class="section__intro u-s-m-b-46">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section__text-wrap">
+                        <!-- تغيير العنوان إلى "Best Seller" -->
+                        <h1 class="section__heading u-c-secondary u-s-m-b-12">BEST SELLER</h1>
+                        <span class="section__span u-c-silver">CHECK OUT THE MOST POPULAR PRODUCTS THIS WEEK.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Intro ======-->
+
+    <!--====== Section Content ======-->
+    <div class="section__content">
+        <div class="container">
+            <div class="row">
+                @forelse ($bestSellersThisWeek as $item)
+                <div class="col-lg-6 col-md-6 u-s-m-b-30">
+                    <div class="product-o product-o--radius product-o--hover-off u-h-100">
+                        <div class="product-o__wrap">
+
+                            <!-- صورة المنتج -->
+                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                <img class="aspect__img" src="{{ $item->product->image }}" alt="{{ $item->product->name }}">
+                            </a>
+
+                            <div class="product-o__action-wrap">
+                                <ul class="product-o__action-list">
+                                    <li>
+                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a>
+                                    </li>
+                                    <li>
+                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- بيانات المنتج -->
+                        <span class="product-o__category">
+                            <a href="shop-side-version-2.html">{{ $item->product->category->name }}</a>
+                        </span>
+
+                        <span class="product-o__name">
+                            <a href="product-detail.html">{{ $item->product->name }}</a>
+                        </span>
+
+                        <div class="product-o__rating gl-rating-style">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="product-o__review">(2)</span>
+                        </div>
+
+                        <span class="product-o__price">${{ $item->product->price }}</span>
+                    </div>
+                </div>
+                @empty
+                <p>No best sellers this week.</p>
+                @endforelse
+            </div>
+        </div>
+    </div>
+    <!--====== End - Section Content ======-->
+</div>
+<!--====== End - Section 3 ======-->
 
                 
 
@@ -158,12 +239,13 @@
                     <div class="filter-category-container">
                     @isset($categories)
     @foreach($categories as $category)
-        <div class="filter__category-wrapper">
-            <a href="{{ route('theme.index', ['category' => $category->name]) }}" class="btn filter__btn filter__btn--style-1">
-                {{ $category->name }}
-            </a>
-        </div>
-    @endforeach
+    <div class="filter__category-wrapper">
+        <a href="{{ route('theme.index', ['category' => $category->name]) }}" class="btn filter__btn filter__btn--style-1">
+            {{ $category->name }} 
+        </a>
+    </div>
+@endforeach
+
 @else
     <p>No categories available.</p>
 @endisset
@@ -179,48 +261,59 @@
     <div class="filter__grid-wrapper u-s-m-t-30">
         <div class="container">
         <div class="row">
-            @foreach($products as $product)
-    <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
-        <div class="product-o product-o--hover-on product-o--radius">
-            <div class="product-o__wrap">
-                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                    <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
-                </a>
-                <div class="product-o__action-wrap">
-                    <ul class="product-o__action-list">
-                        <li><a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="product details">
-                                            <i class="fas fa-search-plus"></i>
-                                        </a></li>
-                        
-                        <li><a href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
-                                            <i class="fas fa-heart"></i>
-                                        </a></li>
-                        
-                    </ul>
+    @if($products->isEmpty())
+        <div class="col-12">
+            <p class="u-c-silver">No products found for the selected category.</p>
+        </div>
+    @else
+        @foreach($products as $product)
+            <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 u-s-m-b-30">
+                <div class="product-o product-o--hover-on product-o--radius">
+                    <div class="product-o__wrap">
+                        <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                            <img class="aspect__img" src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}">
+                        </a>
+                        <div class="product-o__action-wrap">
+                            <ul class="product-o__action-list">
+                                <li>
+                                    <a href="{{ route('product.details', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Product Details">
+                                        <i class="fas fa-search-plus"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ route('wishlist.add', $product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist">
+                                        <i class="fas fa-heart"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <span class="product-o__category">
+                        <a href="shop-side-version-2.html">{{ $product->category->name }}</a>
+                    </span>
+                    <span class="product-o__name">
+                        <a href="product-detail.html">{{ $product->name }}</a>
+                    </span>
+                    <div class="product-o__rating gl-rating-style">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="product-o__review">(23)</span>
+                    </div>
+                    <span class="product-o__price">${{ $product->price }}</span>
+                    <form action="{{ route('cart.add', $product['id']) }}" method="POST">
+                        @csrf
+                        <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
+                            Add to Cart
+                        </button>
+                    </form>
                 </div>
             </div>
-            <span class="product-o__category">
-                <a href="shop-side-version-2.html">{{ $product->category->name }}</a>
-            </span>
-            <span class="product-o__name">
-                <a href="product-detail.html">{{ $product->name }}</a>
-            </span>
-            <div class="product-o__rating gl-rating-style">
-                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                <span class="product-o__review">(23)</span>
-            </div>
-            <span class="product-o__price">${{ $product->price }}</span>
-            <form action="{{ route('cart.add', $product['id']) }}" method="POST">
-                    @csrf
-                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
-                        <i ></i> Add to Cart
-                    </button>
-                </form>
-        </div>
-    </div>
-@endforeach
-        </div>
-    </div>
+        @endforeach
+    @endif
+</div>
+
+    <!-- End Section Content -->
+</div>
+<!-- End Our Products Section -->
 
 
 

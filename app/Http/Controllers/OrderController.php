@@ -18,5 +18,18 @@ class OrderController extends Controller
         // Return the view with the orders data
         return view('admin.orders.index', compact('orders'));
     }
+
+    public function updateStatus(Request $request, $id)
+{
+    // العثور على الطلب بناءً على ID
+    $order = Order::findOrFail($id);
+
+    // تحديث حالة الطلب
+    $order->status = $request->input('status');
+    $order->save();
+
+    // إعادة التوجيه مع رسالة نجاح
+    return redirect()->route('admin.order.index')->with('success', 'Order status updated successfully.');
+}
 }
 

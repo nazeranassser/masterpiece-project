@@ -21,8 +21,10 @@
                                                     <th>Customer Name</th>
                                                     <th>Customer Phone</th>
                                                     <th>Shipping Address</th>
-                                                    <th>Order Status</th>
                                                     <th>Total</th>
+                                                    <th>payment method</th>
+                                                    <th>Order Status</th>
+                                                    
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -33,8 +35,21 @@
                                                       
                                                         <td>{{ $order->customer_phone }}</td> <!-- عرض رقم الهاتف -->
                                                         <td>{{ $order->shipping_address }}</td> <!-- عرض عنوان الشحن -->
-                                                        <td>{{ $order->order_status }}</td> <!-- عرض حالة الطلب -->
-                                                        <td>{{ $order->total }}</td> <!-- عرض المبلغ الإجمالي -->
+                                                        
+                                                        <td>{{ $order->total_amount }}</td> <!-- عرض المبلغ الإجمالي -->
+                                                        <td>{{ $order->payment_method }}</td>
+                                                       <td>
+                <form action="{{ route('admin.admin.orders.updateStatus', $order->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <select name="status" onchange="this.form.submit()">
+                        <option value="pending" {{ $order->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                        <option value="processing" {{ $order->status == 'processing' ? 'selected' : '' }}>Processing</option>
+                        <option value="completed" {{ $order->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                        <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+                    </select>
+                </form>
+            </td> <!-- عرض حالة الطلب -->
                                                     </tr>
                                                 @endforeach
                                             </tbody>
