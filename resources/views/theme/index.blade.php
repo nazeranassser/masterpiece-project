@@ -15,15 +15,19 @@
 
                                         
 
-                                        <span class="content-span-2 u-c-secondary">Unforgettable flavors for every moment</span>
-
-                                        <span class="content-span-3 u-c-secondary">Indulge in the finest cakes made with love, crafted to suit every taste</span>
+                                       
+<span style="color: #ffffff;" class="content-span-2 u-c-secondary">Unforgettable </span>
+                                        <span style="color: #ffffff;" class="content-span-3 u-c-secondary">Indulge in the finest cakes made with love, crafted to suit every taste</span>
 
                                         <span class="content-span-4 u-c-secondary">
 
                                             </span>
 
-                                        <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
+                                      
+
+
+                                         
+                                         <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
                                 </div>
                             </div>
                         </div>
