@@ -73,7 +73,7 @@
                                                         <input class="input-counter__text input-counter--text-primary-style" type="text" name="quantity" value="{{ $item['quantity'] }}" data-min="1" data-max="1000">
                                                         <span class="input-counter__plus fas fa-plus"></span>
                                                     </div>
-                                                    <button type="submit" class="btn btn--update-cart">Update</button>
+                                                    
                                                 </form>
                                             </div>
                                         </td>
@@ -82,8 +82,8 @@
                                                 <form action="{{ route('cart.remove', $item['product_id']) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn--delete-item">
-                                                        <i class="far fa-trash-alt"></i> Remove
+                                                    <button class="w-r__link btn--e-transparent-platinum-b-2" type="submit" title="Remove from wishlist">
+                                                         Remove
                                                     </button>
                                                 </form>
                                             </div>
@@ -105,10 +105,10 @@
                             <div class="route-box__g2">
                                 
                                 <!-- زر تحديث السلة -->
-                                <button class="route-box__link" type="submit">
+                                <a class="route-box__link" type="submit">
                                     <i class="fas fa-sync"></i>
                                     <span>UPDATE CART</span>
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </div>

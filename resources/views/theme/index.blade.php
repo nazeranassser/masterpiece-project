@@ -106,12 +106,15 @@
                                 @endif
                             </span>
                             </div>
+                            
+                            <div style="text-align: left; margin-left: -11px" >
                             <form action="{{ route('cart.add', $product['id']) }}" method="POST">
                     @csrf
                     <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
                         <i ></i> Add to Cart
                     </button>
                 </form>
+                            </div>
                             
                         
                     </div>
@@ -158,23 +161,19 @@
 
                             <!-- صورة المنتج -->
                             <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ $item->product->image }}" alt="{{ $item->product->name }}">
+                                <img class="aspect__img" src="{{ asset('storage/' . $item->product->image) }}" alt="{{ $item->product->name }}">
                             </a>
 
                             <div class="product-o__action-wrap">
                                 <ul class="product-o__action-list">
                                     <li>
-                                        <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View"><i class="fas fa-search-plus"></i></a>
+                                        <a href="{{ route('product.details', $item->product->id) }}" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="product details"><i class="fas fa-search-plus"></i></a>
                                     </li>
+                                    
                                     <li>
-                                        <a data-modal="modal" data-modal-id="#add-to-cart" data-tooltip="tooltip" data-placement="top" title="Add to Cart"><i class="fas fa-plus-circle"></i></a>
+                                        <a href="{{ route('wishlist.add', $item->product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a>
                                     </li>
-                                    <li>
-                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="signin.html" data-tooltip="tooltip" data-placement="top" title="Email me When the price drops"><i class="fas fa-envelope"></i></a>
-                                    </li>
+                                    
                                 </ul>
                             </div>
                         </div>
@@ -196,9 +195,21 @@
                             <i class="fas fa-star"></i>
                             <span class="product-o__review">(2)</span>
                         </div>
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                        <div>
 
-                        <span class="product-o__price">${{ $item->product->price }}</span>
+                        <span class="product-o__price">${{ $item->product->price }}</span></div>
+                        <div>
+                        <form action="{{ route('cart.add', $item->product['id']) }}" method="POST">
+                    @csrf
+                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
+                        <i ></i> Add to Cart
+                    </button>
+                </form>
+                        </div>
+                        </div>
                     </div>
+                    
                 </div>
                 @empty
                 <p>No best sellers this week.</p>
@@ -299,12 +310,14 @@
                         <span class="product-o__review">(23)</span>
                     </div>
                     <span class="product-o__price">${{ $product->price }}</span>
+                    <div style="text-align: left; margin-left: -10px">
                     <form action="{{ route('cart.add', $product['id']) }}" method="POST">
                         @csrf
                         <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
                             Add to Cart
                         </button>
                     </form>
+                    </div>
                 </div>
             </div>
         @endforeach
@@ -334,49 +347,7 @@
 
 
 
-            <!--====== Section 9 ======-->
-            <div class="u-s-p-b-60">
-
-                <!--====== Section Content ======-->
-                <div class="section__content">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-truck"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">Free Shipping</span>
-
-                                        <span class="service__info-text-2">Free shipping on all US order or order above $200</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-redo"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">Shop with Confidence</span>
-
-                                        <span class="service__info-text-2">Our Protection covers your purchase from click to delivery</span></div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6 u-s-m-b-30">
-                                <div class="service u-h-100">
-                                    <div class="service__icon"><i class="fas fa-headphones-alt"></i></div>
-                                    <div class="service__info-wrap">
-
-                                        <span class="service__info-text-1">24/7 Help Center</span>
-
-                                        <span class="service__info-text-2">Round-the-clock assistance for a smooth shopping experience</span></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--====== End - Section Content ======-->
-            </div>
-            <!--====== End - Section 9 ======-->
+            
 
 
            
@@ -702,6 +673,7 @@
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
+    
         window.ga = function() {
             ga.q.push(arguments)
         };

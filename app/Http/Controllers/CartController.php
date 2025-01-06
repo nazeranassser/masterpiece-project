@@ -12,39 +12,46 @@ class CartController extends Controller
 {
     // إضافة منتج إلى السلة
     public function addToCart(Request $request, $product_id)
-    {
-        // الحصول على المنتج من قاعدة البيانات
-        $product = Product::find($product_id);
+{
+    // الحصول على المنتج من قاعدة البيانات
+    $product = Product::find($product_id);
 
-        if (!$product) {
-            return back()->with('error', 'Product not found');
-        }
-
-        // استرجاع السلة الحالية من الكوكيز أو تهيئتها إذا كانت فارغة
-        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
-
-        // التحقق إذا كان المنتج موجودًا بالفعل في السلة
-        foreach ($cart as $key => $item) {
-            if ($item['product_id'] == $product_id) {
-                return back()->with('error', 'Product is already in the cart');
-            }
-        }
-
-        // إضافة المنتج إلى السلة مع الكمية الافتراضية
-        $cart[] = [
-            'product_id' => $product->id,
-            'name' => $product->name,
-            'price' => $product->price,
-            'quantity' => 1, // الكمية الافتراضية
-            'available_quantity' => $product->available_quantity, // الكمية المتوفرة
-            'image' => $product->image
-        ];
-
-        // تخزين السلة الجديدة في الكوكيز
-        Cookie::queue('cart', json_encode($cart), 60); // الكوكيز صالح لمدة 60 دقيقة
-
-        return back()->with('success', 'Product added to cart');
+    if (!$product) {
+        return back()->with('error', 'Product not found');
     }
+
+    // استرجاع السلة الحالية من الكوكيز أو تهيئتها إذا كانت فارغة
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+
+    // التحقق إذا كان المنتج موجودًا بالفعل في السلة
+    foreach ($cart as $key => $item) {
+        if ($item['product_id'] == $product_id) {
+            // تحديث الكمية فقط إذا كانت الكمية الجديدة أقل من المخزون المتاح
+            if ($cart[$key]['quantity'] + 1 > $product->available_quantity) {
+                return back()->with('error', 'Quantity exceeds available stock');
+            }
+            $cart[$key]['quantity'] += 1;
+            Cookie::queue('cart', json_encode($cart), 60);
+            return back()->with('success', 'Product quantity updated in cart');
+        }
+    }
+
+    // إضافة المنتج إلى السلة مع الكمية الافتراضية
+    $cart[] = [
+        'product_id' => $product->id,
+        'name' => $product->name,
+        'price' => $product->price,
+        'quantity' => 1, // الكمية الافتراضية
+        'available_quantity' => $product->available_quantity, // الكمية المتوفرة
+        'image' => $product->image
+    ];
+
+    // تخزين السلة الجديدة في الكوكيز
+    Cookie::queue('cart', json_encode($cart), 60);
+
+    return back()->with('success', 'Product added to cart');
+}
+
 
     // عرض سلة التسوق
     public function viewCart()
@@ -85,29 +92,20 @@ class CartController extends Controller
 
     // تحديث الكمية
     public function updateCart(Request $request)
-    {
-        // استرجاع السلة من الكوكيز
-        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+{
+    $productId = $request->input('product_id');
+    $quantity = $request->input('quantity');
 
-        foreach ($cart as $key => $item) {
-            if ($item['product_id'] == $request->product_id) {
-                // التحقق من أن الكمية المطلوبة لا تتجاوز الكمية المتوفرة
-                $newQuantity = $request->quantity;
-                if ($newQuantity > $item['quantity']) {
-                    return redirect()->back()->with('error', 'Quantity exceeds available stock');
-                }
-
-                // تحديث الكمية
-                $cart[$key]['quantity'] = $newQuantity;
-                break;
-            }
-        }
-
-        // حفظ السلة المحدثة في الكوكيز
-        Cookie::queue('cart', json_encode($cart), 60);
-
-        return redirect()->back()->with('success', 'Cart updated');
+    // تحديث الكمية في السلة
+    $cart = session()->get('cart', []);
+    if (isset($cart[$productId])) {
+        $cart[$productId]['quantity'] = $quantity;
+        session()->put('cart', $cart);
     }
+
+    return redirect()->route('cart.index')->with('success', 'Cart updated successfully!');
+}
+
 
     // إتمام الشراء (Checkout)
     public function checkout(Request $request)
@@ -145,10 +143,16 @@ public function placeOrder(Request $request)
         'billing_fname' => 'required|string|max:255',
         'billing_lname' => 'required|string|max:255',
         'billing_email' => 'required|email|max:255',
-        'billing_phone' => 'required|string|max:15',
+        'billing_phone' => 'required|numeric|digits:10',
         'billing_street' => 'required|string|max:255',
         'order_note' => 'nullable|string|max:1000',
-    ]);
+    ],
+    [
+        'billing_phone.required' => 'Phone number is required.',
+        'billing_phone.numeric' => 'The phone number should contain only numbers.',
+        'billing_phone.digits' => 'The phone number should be exactly 10 digits.',
+    ]
+);
 
     // تحقق من أن السلة ليست فارغة
     $cart = json_decode(Cookie::get('cart') ?? '[]', true);
@@ -200,5 +204,15 @@ public function placeOrder(Request $request)
     {
         return view('theme.order_success');
     }
+
+    public function getCartItemCount()
+{
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+    $totalItems = array_reduce($cart, function ($carry, $item) {
+        return $carry + $item['quantity'];
+    }, 0);
+
+    return response()->json(['totalItems' => $totalItems]);
+}
 }
 

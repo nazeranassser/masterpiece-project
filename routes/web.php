@@ -77,7 +77,8 @@ Route::prefix('cart')->name('cart.')->group(function () {
     Route::delete('remove/{id}', [CartController::class, 'removeItemFromCart'])->name('remove');
     
     // تحديث الكمية في السلة
-    Route::post('update', [CartController::class, 'updateCart'])->name('update');
+    Route::post('/cart/update', [CartController::class, 'updateCart'])->name('update');
+
     Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
     Route::post('/cart/checkout/placeOrder', [CartController::class, 'placeOrder'])->name('cart.placeorder');
 });

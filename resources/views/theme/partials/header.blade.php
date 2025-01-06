@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
     <link href="{{asset('assets')}}/images/favicon.png" rel="shortcut icon">
     <title>masterpiece</title>
 
@@ -23,6 +24,7 @@
 
     <!--====== App ======-->
     <link rel="stylesheet" href="{{asset('assets')}}/css/app.css">
+    
 </head>
 <body class="config">
     <div class="preloader is-active">
