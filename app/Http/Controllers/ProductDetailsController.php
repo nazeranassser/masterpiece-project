@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Product;
+use Illuminate\Support\Facades\Cookie;
 
 class ProductDetailsController extends Controller
 {
@@ -23,10 +24,16 @@ class ProductDetailsController extends Controller
                                    ->take(4) // عدد المنتجات المشابهة
                                    ->get();
 
+                                   $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+
         // عرض الصفحة مع البيانات
         return view('theme.productdetail', [
             'product' => $product,
             'similarProducts' => $similarProducts,
+            'totalItems' => $totalItems
         ]);
     }
 }

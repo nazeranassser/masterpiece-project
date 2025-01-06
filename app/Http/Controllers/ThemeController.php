@@ -53,19 +53,31 @@ class ThemeController extends Controller
 
     public function about()
     {
-        return view('theme.about');
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return view('theme.about' , compact('totalItems'));
     }
 
     public function contact()
     {
-        return view('theme.contact');
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return view('theme.contact'  , compact('totalItems'));
     }
 
    
 
     public function wishlist()
     {
-        return view('theme.wishlist');
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+        return view('theme.wishlist' , compact('totalItems'));
     }
 
     // دالة عرض المنتجات الجديدة

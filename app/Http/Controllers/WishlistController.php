@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
 
 class WishlistController extends Controller
 {
@@ -10,8 +11,12 @@ class WishlistController extends Controller
     public function index()
     {
         $wishlist = session()->get('wishlist', []);
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
 
-        return view('theme.wishlist', compact('wishlist'));
+        return view('theme.wishlist', compact('wishlist' , 'totalItems'));
     }
 
     // إضافة منتج إلى الـ Wishlist
@@ -37,6 +42,7 @@ class WishlistController extends Controller
                 ];
 
                 session()->put('wishlist', $wishlist);
+                session()->flash('message', 'Product added to wishlist!');
             }
         }
 

@@ -1,3 +1,8 @@
+@if(session()->has('message'))
+    <div id="wishlist-notification" class="notification">
+        <p>{{ session('message') }}</p>
+    </div>
+@endif
 @include('theme.partials.header')
 
 
@@ -178,6 +183,7 @@
 
     <!--====== Google Analytics: change UA-XXXXX-Y to be your site's ID ======-->
     <script>
+    
         window.ga = function() {
             ga.q.push(arguments)
         };
@@ -186,7 +192,46 @@
         ga('create', 'UA-XXXXX-Y', 'auto');
         ga('send', 'pageview')
     </script>
+    @if(session()->has('message'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var notification = document.getElementById('wishlist-notification');
+            notification.classList.add('show');
+
+            setTimeout(function () {
+                notification.classList.remove('show');
+            }, 3000); // تختفي الرسالة بعد 3 ثواني
+        });
+    </script>
+@endif
+
     <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+    <style>
+    /* ====== Message Notification Styles ====== */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* اللون الأخضر */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* إخفاء الرسالة بشكل افتراضي */
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.notification.show {
+    display: block;
+    opacity: 1;
+}
+
+/* ====== End - Message Notification Styles ====== */
+    </style>
 
     <!--====== Vendor Js ======-->
     <script src="{{asset('assets')}}/js/vendor.js"></script>

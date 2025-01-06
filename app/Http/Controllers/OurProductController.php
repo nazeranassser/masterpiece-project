@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cookie;
+
 
 class OurProductController extends Controller
 {
@@ -41,9 +43,14 @@ class OurProductController extends Controller
         } else {
             $products = $query->paginate(8); // عرض 12 منتجًا افتراضيًا
         }
+        $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+    
 
         // تمرير البيانات إلى الـ View
-        return view('theme.ourproducts', compact('products', 'category'));
+        return view('theme.ourproducts', compact('products', 'category', 'totalItems'));
     }
 }
 

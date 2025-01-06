@@ -201,7 +201,7 @@ public function placeOrder(Request $request)
     // تفريغ السلة بعد الإتمام
     Cookie::queue(Cookie::forget('cart'));
 
-    return redirect()->route('theme.index')->with('success', 'Order placed successfully');
+    return redirect()->route('order.success')->with('success', 'Order placed successfully');
 }
 
 

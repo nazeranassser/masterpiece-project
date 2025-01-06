@@ -68,6 +68,7 @@
         <div class="u-s-m-b-15">
         <select name="payment_method" required>
               <option value="cash-on-delivery">Cash on Delivery</option>
+              <option value="credit-card">Credit Card</option>
     
     <!-- إضافة خيارات أخرى حسب الحاجة -->
                    </select>
@@ -77,7 +78,16 @@
         
 
     </div>
-    <button type="submit">Place Order</button>
+   
+    <div class="o-summary__box">
+                                
+
+                        <!-- زر "PLACE ORDER" الثاني -->
+                        <div>
+                            <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>
+                        </div>
+                    
+                            </div>
 </form>
 </div>
 
@@ -147,29 +157,7 @@
 
 
 
-                        <!-- Payment Information -->
-                        <div class="o-summary__section u-s-m-b-30">
-                            <div class="o-summary__box">
-                                <h1 class="checkout-f__h1">PAYMENT INFORMATION</h1>
-                                <form class="checkout-f__payment" method="POST" action="{{ route('cart.cart.placeorder') }}">
-                                    @csrf
-                                    <!-- Payment Method Selection -->
-                                    <div class="u-s-m-b-10">
-                                        <div class="radio-box">
-                                            <input type="radio" id="cash-on-delivery" name="payment" value="cash-on-delivery" required>
-                                            <div class="radio-box__state radio-box__state--primary">
-                                                <label class="radio-box__label" for="cash-on-delivery">Cash on Delivery</label>
-                                            </div>
-                                        </div>
-                                        <span class="gl-text u-s-m-t-6">Pay Upon Cash on delivery. (This service is only available for some countries)</span>
-                                    </div>
-
-                                    <div>
-                                        <button class="btn btn--e-brand-b-2" type="submit">PLACE ORDER</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
