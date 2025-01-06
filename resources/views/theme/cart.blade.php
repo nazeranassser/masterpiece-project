@@ -1,3 +1,16 @@
+@if(session()->has('success'))
+    <div id="cart-notification" class="notification">
+        <p>{{ session('success') }}</p>
+    </div>
+@endif
+
+@if(session()->has('error'))
+    <div id="cart-notification" class="notification error">
+        <p>{{ session('error') }}</p>
+    </div>
+@endif
+
+
 @include('theme.partials.header')
 
 <!--====== App Content ======-->
@@ -152,6 +165,48 @@
 <script src="{{ asset('assets/js/vendor.js') }}"></script>
 <script src="{{ asset('assets/js/jquery.shopnav.js') }}"></script>
 <script src="{{ asset('assets/js/app.js') }}"></script>
+@if(session()->has('success') || session()->has('error'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var notification = document.getElementById('cart-notification');
+            notification.classList.add('show');
+
+            setTimeout(function () {
+                notification.classList.remove('show');
+            }, 3000); // تختفي الرسالة بعد 3 ثواني
+        });
+    </script>
+@endif
+
+<style>
+/* ====== Flash Message Notification Styles ====== */
+.notification {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #28a745; /* اللون الأخضر للرسائل الناجحة */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: none; /* إخفاء الرسالة بشكل افتراضي */
+    z-index: 9999;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.notification.error {
+    background-color: #dc3545; /* اللون الأحمر للرسائل الخطأ */
+}
+
+.notification.show {
+    display: block;
+    opacity: 1;
+}
+
+</style>
 
 <!--====== Noscript ======-->
 <noscript>

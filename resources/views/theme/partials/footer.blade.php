@@ -9,7 +9,7 @@
                                 <span class="outer-footer__content-title">Contact Us</span>
                                 <div class="outer-footer__text-wrap"><i class="fas fa-home"></i>
 
-                                    <span>4247 Ashford Drive Virginia VA-20006 USA</span></div>
+                                    <span>JORDAN-AMMAN</span></div>
                                 <div class="outer-footer__text-wrap"><i class="fas fa-phone-volume"></i>
 
                                     <span>(+0) 900 901 904</span></div>
@@ -127,31 +127,5 @@
                     </div>
                 </div>
             </div>
-            <div class="lower-footer">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="lower-footer__content">
-                                <div class="lower-footer__copyright">
-
-                                    <span>Copyright © 2018</span>
-
-                                    <a href="index.html">Reshop</a>
-
-                                    <span>All Right Reserved</span></div>
-                                <div class="lower-footer__payment">
-                                    <ul>
-                                        <li><i class="fab fa-cc-stripe"></i></li>
-                                        <li><i class="fab fa-cc-paypal"></i></li>
-                                        <li><i class="fab fa-cc-mastercard"></i></li>
-                                        <li><i class="fab fa-cc-visa"></i></li>
-                                        <li><i class="fab fa-cc-discover"></i></li>
-                                        <li><i class="fab fa-cc-amex"></i></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
         </footer>

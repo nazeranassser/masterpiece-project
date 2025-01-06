@@ -49,7 +49,7 @@ class CartController extends Controller
     // تخزين السلة الجديدة في الكوكيز
     Cookie::queue('cart', json_encode($cart), 60);
 
-    return back()->with('success', 'Product added to cart');
+    return redirect()->route('cart.index')->with('success', 'Product added to cart');
 }
 
 
