@@ -63,9 +63,13 @@ class CartController extends Controller
         $total_amount = 0;
         foreach ($cart as $item) {
             $total_amount += $item['price'] * $item['quantity'];
-        }
 
-        return view('theme.cart', compact('cart', 'total_amount'));
+        }
+        $totalItems = array_reduce($cart, function ($carry, $item) {
+            return $carry + $item['quantity'];
+        }, 0);
+
+        return view('theme.cart', compact('cart', 'total_amount', 'totalItems'));
     }
 
     // حذف منتج من السلة
@@ -125,12 +129,16 @@ class CartController extends Controller
     foreach ($cart as $item) {
         $total_amount += $item['price'] * $item['quantity'];
     }
+    $totalItems = array_reduce($cart, function ($carry, $item) {
+        return $carry + $item['quantity'];
+    }, 0);
 
     // تمرير بيانات السلة إلى الصفحة
     return view('theme.checkout', [
         'cart' => $cart,
         'total_amount' => $total_amount,
-        'userId' => $userId
+        'userId' => $userId,
+        'totalItems' => $totalItems
     ]);
 }
 

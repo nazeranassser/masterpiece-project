@@ -163,7 +163,7 @@
 
                                         <a href="{{ route('cart.index') }}" class="mini-cart-shop-link"><i class="fas fa-shopping-bag"></i>
 
-                                            <span class="total-item-round">2</span></a>
+                                            <span class="total-item-round">{{$totalItems}}</span></a>
                                             
 
                                         

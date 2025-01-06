@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Message;
 use App\Models\OrderProduct;
+use Illuminate\Support\Facades\Cookie;
 
 
 use Illuminate\Http\Request;
@@ -39,8 +40,15 @@ class ThemeController extends Controller
     $productsByType = Product::with('category')->get();  // assuming 'type' is the relationship name
     $bestSellersThisWeek = OrderProduct::getBestSellersThisWeek(2);
 
+    $cart = Cookie::get('cart') ? json_decode(Cookie::get('cart'), true) : [];
+    
+    // حساب العدد الإجمالي للمنتجات في السلة
+    $totalItems = array_reduce($cart, function ($carry, $item) {
+        return $carry + $item['quantity'];
+    }, 0);
+
     // عرض الصفحة الرئيسية مع تمرير البيانات
-    return view('theme.index', compact('newArrivals', 'products', 'productsByType','themeMessages','categories','bestSellersThisWeek'));
+    return view('theme.index', compact('newArrivals', 'products', 'productsByType','themeMessages','categories','bestSellersThisWeek','totalItems'));
 }
 
     public function about()
