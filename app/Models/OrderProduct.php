@@ -28,7 +28,7 @@ class OrderProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
-    public static function getBestSellersThisWeek()
+    public static function getBestSellersThisWeek($id )
     {
         // Example logic to fetch best sellers of the week
         return self::select('product_id', DB::raw('COUNT(*) as total_sales'))

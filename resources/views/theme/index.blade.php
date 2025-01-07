@@ -154,67 +154,7 @@
     </div>
     <!--====== End - Section Intro ======-->
 
-    <!--====== Section Content ======-->
-    <div class="section__content">
-        <div class="container">
-            <div class="row">
-                @forelse ($bestSellersThisWeek as $item)
-                <div class="col-lg-6 col-md-6 u-s-m-b-30">
-                    <div class="product-o product-o--radius product-o--hover-off u-h-100">
-                        <div class="product-o__wrap">
-
-                            <!-- صورة المنتج -->
-                            <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
-                                <img class="aspect__img" src="{{ asset('storage/' . $item->product->image) }}" alt="{{ $item->product->name }}">
-                            </a>
-
-                            <div class="product-o__action-wrap">
-                                <ul class="product-o__action-list">
-                                    <li>
-                                        <a href="{{ route('product.details', $item->product->id) }}" data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="product details"><i class="fas fa-search-plus"></i></a>
-                                    </li>
-                                    
-                                    <li>
-                                        <a href="{{ route('wishlist.add', $item->product->id) }}" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist"><i class="fas fa-heart"></i></a>
-                                    </li>
-                                    
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- بيانات المنتج -->
-                        <span class="product-o__category">
-                            <a href="shop-side-version-2.html">{{ $item->product->category->name }}</a>
-                        </span>
-
-                        <span class="product-o__name">
-                            <a href="product-detail.html">{{ $item->product->name }}</a>
-                        </span>
-
-                       
-                        <div style="display: flex; align-items: center; justify-content: space-between;">
-                        <div>
-
-                        <span class="product-o__price">${{ $item->product->price }}</span></div>
-                        <div>
-                        <form action="{{ route('cart.add', $item->product['id']) }}" method="POST">
-                    @csrf
-                    <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
-                        <i ></i> Add to Cart
-                    </button>
-                </form>
-                        </div>
-                        </div>
-                    </div>
-                    
-                </div>
-                @empty
-                <p>No best sellers this week.</p>
-                @endforelse
-            </div>
-        </div>
-    </div>
-    <!--====== End - Section Content ======-->
+    
 </div>
 <!--====== End - Section 3 ======-->
 
