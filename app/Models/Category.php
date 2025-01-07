@@ -12,6 +12,7 @@ class Category extends Model
     protected $fillable = [
         'name',
         'image',
+        'slug',
     ];
 
     // تعريف العلاقة بين الـ Category والـ Products

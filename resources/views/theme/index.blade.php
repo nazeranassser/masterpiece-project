@@ -16,7 +16,7 @@
                                         
 
                                        
-<span style="color: #ffffff;" class="content-span-2 u-c-secondary">Unforgettable </span>
+<span style="color: #ffffff;" class="content-span-2 u-c-secondary">Where taste meets health</span>
                                         <span style="color: #ffffff;" class="content-span-3 u-c-secondary">Indulge in the finest cakes made with love, crafted to suit every taste</span>
 
                                         <span class="content-span-4 u-c-secondary">
@@ -27,7 +27,7 @@
 
 
                                          
-                                         <a class="shop-now-link btn--e-brand" href="shop-side-version-2.html">SHOP NOW</a></div>
+                                         <a class="shop-now-link btn--e-brand" href="">SHOP NOW</a></div>
                                 </div>
                             </div>
                         </div>
@@ -101,8 +101,8 @@
                             <a href="product-detail.html">{{ $product->name }}</a>
                         </span>
                         <div class="product-o__rating gl-rating-style">
-                            <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                            <span class="product-o__review">(0)</span>
+                           
+                            
                             <span class="product-o__price">
                                 ${{ number_format($product->price, 2) }}
                                 @if($product->discount_price)
@@ -191,14 +191,7 @@
                             <a href="product-detail.html">{{ $item->product->name }}</a>
                         </span>
 
-                        <div class="product-o__rating gl-rating-style">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <span class="product-o__review">(2)</span>
-                        </div>
+                       
                         <div style="display: flex; align-items: center; justify-content: space-between;">
                         <div>
 
@@ -309,10 +302,7 @@
                     <span class="product-o__name">
                         <a href="product-detail.html">{{ $product->name }}</a>
                     </span>
-                    <div class="product-o__rating gl-rating-style">
-                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
-                        <span class="product-o__review">(23)</span>
-                    </div>
+                    
                     <span class="product-o__price">${{ $product->price }}</span>
                     <div style="text-align: left; margin-left: -10px">
                     <form action="{{ route('cart.add', $product['id']) }}" method="POST">

@@ -206,6 +206,29 @@
                     </div>
                 </div>
                 <!--====== End - Section Content ======-->
+                
+                <!--====== Section Content ======-->
+                <div class="section__content">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="about">
+                                    <div class="about__container">
+                                        <div class="about__info">
+                                            <h2 class="about__h2">Healthy for Kids Cake</h2>
+                                            <div class="about__p-wrap">
+                                                <p class="about__p">"Healthy for Kids" cakes are designed with your child's health in mind! These cakes are packed with essential minerals that children need daily to grow strong and healthy. Rich in calcium, iron, and magnesium, they support bone development, boost energy, and improve overall well-being. Not only are these cakes packed with goodness, but they are also incredibly tasty, ensuring that kids enjoy every bite. Made with natural, nutrient-dense ingredients, our cakes are free from artificial additives and unhealthy sugars, making them the perfect treat for your little ones. They are a great way to offer a healthy, delicious snack that both parents and kids will love!</p>
+                                            </div>
+
+                                            <a class="about__link btn--e-secondary" href="{{ url('/ourproducts/Healthy for Kids') }}" target="_blank">Shop Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--====== End - Section Content ======-->
             </div>
             <!--====== End - Section 2 ======-->
            

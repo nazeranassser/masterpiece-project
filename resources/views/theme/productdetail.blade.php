@@ -146,24 +146,18 @@
                                     <a href="{{ route('product.details', $similar->id) }}">{{ $similar->name }}</a>
                                 </span>
 
-                                <div class="product-o__rating gl-rating-style">
-                                <i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i><i class="far fa-star"></i>
-                            <span class="product-o__review">(0)</span>
-                                    @for ($i = 0; $i < 5; $i++)
-                                        <i class="fas fa-star{{ $i < $similar->rating ? '' : '-o' }}"></i>
-                                    @endfor
-                                    <span class="product-o__review"></span>
-                                </div>
+                                
 
                                 <span class="product-o__price">${{ $similar->price }}</span>
                                 
-
+<div style="text-align: left; margin-left: -11px" >
                                 <form action="{{ route('cart.add', $similar['id']) }}" method="POST">
                     @csrf
                     <button class="w-r__link btn--e-brand-b-2" type="submit" title="Add to Cart">
                         <i ></i> Add to Cart
                     </button>
                 </form>
+                </div>
                             </div>
                         </div>
                         @endforeach

@@ -52,9 +52,10 @@
                         <!--====== iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii need logo here  ======-->
                          <!--====== Main Logo ======-->
 
-                        <a class="main-logo" href="{{route('theme.index')}}">
+                      <a style="font-size: 25px; font-weight: bold; color: #000; text-decoration: none;" href="{{ route('theme.index') }}">
+    LEVO
+</a>
 
-                            <img src="{{asset('assets')}}/images/logo/logo-1.png" alt=""></a>
                         <!--====== End - Main Logo ======-->
 
 
@@ -103,6 +104,9 @@
                                             <li>
 
                                                 <a href="{{ url('/ourproducts/High Protein') }}">High Protein</a></li>
+                                                <li>
+
+                                                <a href="{{ url('/ourproducts/Healthy for Kids') }}">Healthy for Kids</a></li>
                                                 <li>
 
                                                 <a href="{{ url('/ourproducts/special occasions') }}">special occasions</a></li>

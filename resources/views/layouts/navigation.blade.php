@@ -4,7 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Include Header -->
-                <a href="{{ route('theme.index') }}" class="flex-shrink-0 flex items-center"> LIVO </a>
+                 <a style="font-size: 25px; font-weight: bold; color: #000; text-decoration: none;" href="{{ route('theme.index') }}">
+    LEVO
+</a>
             </div>
 
             <!-- Profile Dropdown -->
